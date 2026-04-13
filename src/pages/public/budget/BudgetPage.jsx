@@ -57,15 +57,15 @@ export default function BudgetPage() {
 
   return (
     <PageLayout>
-      <Box sx={{ minHeight: "100vh", backgroundColor: "#f8f9fb", py: 4 }}>
+      <Box sx={{ minHeight: "100vh", backgroundColor: "var(--bg-gray)", py: 4 }}>
         <Container maxWidth="xl">
           {/* Header */}
           <Box sx={{ mb: 4 }}>
             <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 1 }}>
               <DollarSign size={28} color={PRIMARY} />
-              <Typography sx={{ fontSize: "1.8rem", fontWeight: 800, color: "#111827" }}>Budget Planner</Typography>
+              <Typography sx={{ fontSize: "1.8rem", fontWeight: 800, color: "var(--text-dark)" }}>Budget Planner</Typography>
             </Box>
-            <Typography sx={{ color: "#6b7280", fontSize: "1rem" }}>
+            <Typography sx={{ color: "var(--text-muted)", fontSize: "1rem" }}>
               Find datasets that fit your budget. Compare pricing tiers and plan your data purchases.
             </Typography>
           </Box>
@@ -76,7 +76,7 @@ export default function BudgetPage() {
               <CardContent sx={{ p: 2, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 2 }}>
                 <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
                   <ShoppingCart size={20} color={PRIMARY} />
-                  <Typography sx={{ fontWeight: 700, color: "#111827" }}>{cart.length} dataset{cart.length > 1 ? "s" : ""} in cart</Typography>
+                  <Typography sx={{ fontWeight: 700, color: "var(--text-dark)" }}>{cart.length} dataset{cart.length > 1 ? "s" : ""} in cart</Typography>
                 </Box>
                 <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                   <Typography sx={{ fontSize: "1.2rem", fontWeight: 800, color: PRIMARY }}>Total: ${cartTotal.toLocaleString()}</Typography>
@@ -90,37 +90,37 @@ export default function BudgetPage() {
 
           {/* Search */}
           <TextField fullWidth placeholder="Search datasets by name, author, category..." value={search} onChange={e => setSearch(e.target.value)} variant="outlined"
-            sx={{ mb: 3, backgroundColor: "#fff", borderRadius: "10px", "& .MuiOutlinedInput-root": { borderRadius: "10px", height: 50 } }}
-            InputProps={{ startAdornment: <InputAdornment position="start"><Search size={20} color="#6b7280" /></InputAdornment> }}
+            sx={{ mb: 3, backgroundColor: "var(--bg-white)", borderRadius: "10px", "& .MuiOutlinedInput-root": { borderRadius: "10px", height: 50 } }}
+            InputProps={{ startAdornment: <InputAdornment position="start"><Search size={20} color="var(--text-muted)" /></InputAdornment> }}
           />
 
           <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "280px 1fr" }, gap: 4, alignItems: "start" }}>
             {/* Sidebar Filters */}
             <Box>
               {/* Budget Slider */}
-              <Card sx={{ borderRadius: 2, border: "1px solid #e5e7eb", boxShadow: "none", mb: 2 }}>
+              <Card sx={{ borderRadius: 2, border: `1px solid var(--border-color)`, boxShadow: "none", mb: 2 }}>
                 <CardContent sx={{ p: 2.5 }}>
-                  <Typography sx={{ fontWeight: 700, color: "#111827", mb: 2 }}>Budget Range</Typography>
+                  <Typography sx={{ fontWeight: 700, color: "var(--text-dark)", mb: 2 }}>Budget Range</Typography>
                   <Box sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>
-                    <Typography sx={{ fontSize: "0.85rem", color: "#6b7280" }}>${budgetRange[0]}</Typography>
-                    <Typography sx={{ fontSize: "0.85rem", color: "#6b7280" }}>${budgetRange[1]}</Typography>
+                    <Typography sx={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>${budgetRange[0]}</Typography>
+                    <Typography sx={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>${budgetRange[1]}</Typography>
                   </Box>
                   <Slider value={budgetRange} onChange={(_, v) => setBudgetRange(v)} min={0} max={1000} step={50}
                     sx={{ color: PRIMARY, "& .MuiSlider-thumb": { backgroundColor: PRIMARY }, "& .MuiSlider-track": { backgroundColor: PRIMARY } }}
                   />
-                  <Typography sx={{ fontSize: "0.8rem", color: "#6b7280", mt: 1 }}>{filtered.length} datasets in range</Typography>
+                  <Typography sx={{ fontSize: "0.8rem", color: "var(--text-muted)", mt: 1 }}>{filtered.length} datasets in range</Typography>
                 </CardContent>
               </Card>
 
               {/* Tier Filter */}
-              <Card sx={{ borderRadius: 2, border: "1px solid #e5e7eb", boxShadow: "none", mb: 2 }}>
+              <Card sx={{ borderRadius: 2, border: `1px solid var(--border-color)`, boxShadow: "none", mb: 2 }}>
                 <CardContent sx={{ p: 2.5 }}>
-                  <Typography sx={{ fontWeight: 700, color: "#111827", mb: 1.5 }}>Pricing Tier</Typography>
+                  <Typography sx={{ fontWeight: 700, color: "var(--text-dark)", mb: 1.5 }}>Pricing Tier</Typography>
                   <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
                     {tiers.map(t => (
-                      <Box key={t} onClick={() => setSelectedTier(t)} sx={{ display: "flex", alignItems: "center", gap: 1.5, p: 1.2, borderRadius: 1.5, cursor: "pointer", backgroundColor: selectedTier === t ? "#e6f7f6" : "transparent", border: selectedTier === t ? `1px solid ${PRIMARY}` : "1px solid transparent", "&:hover": { backgroundColor: "#f0fffe" } }}>
+                      <Box key={t} onClick={() => setSelectedTier(t)} sx={{ display: "flex", alignItems: "center", gap: 1.5, p: 1.2, borderRadius: 1.5, cursor: "pointer", backgroundColor: selectedTier === t ? "#e6f7f6" : "transparent", border: selectedTier === t ? `1px solid ${PRIMARY}` : "1px solid transparent", "&:hover": { backgroundColor: "var(--hover-bg)" } }}>
                         {selectedTier === t && <CheckCircle size={14} color={PRIMARY} />}
-                        <Typography sx={{ fontSize: "0.9rem", fontWeight: selectedTier === t ? 600 : 400, color: selectedTier === t ? PRIMARY : "#374151" }}>{t}</Typography>
+                        <Typography sx={{ fontSize: "0.9rem", fontWeight: selectedTier === t ? 600 : 400, color: selectedTier === t ? PRIMARY : "var(--text-dark)" }}>{t}</Typography>
                       </Box>
                     ))}
                   </Box>
@@ -128,10 +128,10 @@ export default function BudgetPage() {
               </Card>
 
               {/* Subscription Plans */}
-              <Card sx={{ borderRadius: 2, border: "1px solid #e5e7eb", boxShadow: "none" }}>
+              <Card sx={{ borderRadius: 2, border: `1px solid var(--border-color)`, boxShadow: "none" }}>
                 <CardContent sx={{ p: 2.5 }}>
-                  <Typography sx={{ fontWeight: 700, color: "#111827", mb: 1.5 }}>Subscription Plans</Typography>
-                  <Typography sx={{ fontSize: "0.75rem", color: "#6b7280", mb: 2 }}>Choose a plan that works for you</Typography>
+                  <Typography sx={{ fontWeight: 700, color: "var(--text-dark)", mb: 1.5 }}>Subscription Plans</Typography>
+                  <Typography sx={{ fontSize: "0.75rem", color: "var(--text-muted)", mb: 2 }}>Choose a plan that works for you</Typography>
                   {pricingTiers.map(tier => (
                     <Box key={tier.name} sx={{ mb: 2, p: 1.5, borderRadius: 1.5, backgroundColor: tier.bg, border: `1px solid ${tier.border}` }}>
                       <Box sx={{ display: "flex", justifyContent: "space-between", mb: 0.8, alignItems: "center" }}>
@@ -153,10 +153,10 @@ export default function BudgetPage() {
             {/* Dataset Cards */}
             <Box>
               <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
-                <Typography sx={{ fontWeight: 700, color: "#111827" }}>{filtered.length} datasets found</Typography>
+                <Typography sx={{ fontWeight: 700, color: "var(--text-dark)" }}>{filtered.length} datasets found</Typography>
                 <Box sx={{ display: "flex", gap: 1 }}>
                   {["Price: Low", "Price: High", "Rating", "Popular"].map(s => (
-                    <Chip key={s} label={s} size="small" variant="outlined" sx={{ fontSize: "0.78rem", cursor: "pointer", "&:hover": { backgroundColor: "#e6f7f6" } }} />
+                    <Chip key={s} label={s} size="small" variant="outlined" sx={{ fontSize: "0.78rem", cursor: "pointer", "&:hover": { backgroundColor: "var(--hover-bg)" } }} />
                   ))}
                 </Box>
               </Box>
@@ -173,8 +173,8 @@ export default function BudgetPage() {
 
               {filtered.length === 0 && (
                 <Box sx={{ textAlign: "center", py: 8 }}>
-                  <DollarSign size={48} color="#d1d5db" style={{ margin: "0 auto 16px" }} />
-                  <Typography sx={{ color: "#6b7280" }}>No datasets match your budget criteria</Typography>
+                  <DollarSign size={48} color="var(--border-color)" style={{ margin: "0 auto 16px" }} />
+                  <Typography sx={{ color: "var(--text-muted)" }}>No datasets match your budget criteria</Typography>
                 </Box>
               )}
             </Box>
@@ -187,9 +187,9 @@ export default function BudgetPage() {
 
 function BudgetDatasetCard({ dataset, inCart, inWishlist, onCart, onWishlist, onOpen, tierColor }) {
   return (
-    <Card sx={{ borderRadius: "12px", overflow: "hidden", border: "1px solid #e5e7eb", boxShadow: "none", transition: "all 0.3s ease", cursor: "pointer", "&:hover": { transform: "translateY(-4px)", boxShadow: "0 10px 24px rgba(97,197,195,0.12)", borderColor: PRIMARY } }}>
+    <Card sx={{ borderRadius: "12px", overflow: "hidden", border: `1px solid var(--border-color)`, boxShadow: "none", transition: "all 0.3s ease", cursor: "pointer", "&:hover": { transform: "translateY(-4px)", boxShadow: "0 10px 24px rgba(97,197,195,0.12)", borderColor: PRIMARY } }}>
       <Box sx={{ height: 150, backgroundImage: `url(${dataset.image})`, backgroundSize: "cover", backgroundPosition: "center", position: "relative" }} onClick={onOpen}>
-        <Box sx={{ position: "absolute", top: 8, left: 8, px: 1, py: 0.3, borderRadius: 1, backgroundColor: tierColor || "#6b7280" }}>
+        <Box sx={{ position: "absolute", top: 8, left: 8, px: 1, py: 0.3, borderRadius: 1, backgroundColor: tierColor || "var(--text-muted)" }}>
           <Typography sx={{ fontSize: "0.7rem", fontWeight: 700, color: "#fff" }}>{dataset.tier}</Typography>
         </Box>
         <Box sx={{ position: "absolute", top: 8, right: 8, display: "flex", gap: 0.8 }}>
@@ -201,28 +201,28 @@ function BudgetDatasetCard({ dataset, inCart, inWishlist, onCart, onWishlist, on
 
       <CardContent sx={{ p: 2 }} onClick={onOpen}>
         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 1, mb: 0.8 }}>
-          <Typography sx={{ fontSize: "0.92rem", fontWeight: 700, color: "#111827", lineHeight: 1.4, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{dataset.title}</Typography>
-          <MoreVertical size={15} color="#9ca3af" style={{ flexShrink: 0 }} />
+          <Typography sx={{ fontSize: "0.92rem", fontWeight: 700, color: "var(--text-dark)", lineHeight: 1.4, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{dataset.title}</Typography>
+          <MoreVertical size={15} color="var(--text-muted)" style={{ flexShrink: 0 }} />
         </Box>
-        <Typography sx={{ fontSize: "0.82rem", color: "#1f2937", fontWeight: 500, mb: 0.8 }}>{dataset.author}</Typography>
-        <Box sx={{ display: "flex", alignItems: "center", gap: 0.8, mb: 1.2, fontSize: "0.75rem", color: "#6b7280" }}>
-          <span>Usability <b style={{ color: "#111827" }}>{dataset.usability}</b></span>
-          <Box sx={{ width: 3, height: 3, borderRadius: "50%", backgroundColor: "#d1d5db" }} />
+        <Typography sx={{ fontSize: "0.82rem", color: "var(--text-dark)", fontWeight: 500, mb: 0.8 }}>{dataset.author}</Typography>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 0.8, mb: 1.2, fontSize: "0.75rem", color: "var(--text-muted)" }}>
+          <span>Usability <b style={{ color: "var(--text-dark)" }}>{dataset.usability}</b></span>
+          <Box sx={{ width: 3, height: 3, borderRadius: "50%", backgroundColor: "var(--border-color)" }} />
           <Calendar size={11} /><span>{dataset.updated}</span>
         </Box>
 
-        <Box sx={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 0.6, mb: 1.5, pb: 1.5, borderBottom: "1px solid #e5e7eb" }}>
+        <Box sx={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 0.6, mb: 1.5, pb: 1.5, borderBottom: `1px solid var(--border-color)` }}>
           {[{ icon: <FileIcon size={12} color={PRIMARY} />, label: dataset.files }, { icon: <HardDrive size={12} color={PRIMARY} />, label: dataset.size }, { icon: <Download size={12} color={PRIMARY} />, label: dataset.downloads }].map((item, i) => (
-            <Box key={i} sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 0.3, p: 0.6, borderRadius: 1, backgroundColor: "#f9fafb" }}>
+            <Box key={i} sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 0.3, p: 0.6, borderRadius: 1, backgroundColor: "var(--bg-secondary)" }}>
               {item.icon}
-              <Typography sx={{ fontSize: "0.62rem", color: "#6b7280", textAlign: "center", lineHeight: 1.2 }}>{item.label}</Typography>
+              <Typography sx={{ fontSize: "0.62rem", color: "var(--text-muted)", textAlign: "center", lineHeight: 1.2 }}>{item.label}</Typography>
             </Box>
           ))}
         </Box>
 
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <Box sx={{ display: "flex", alignItems: "center", border: "1px solid #d1d5db", borderRadius: "6px", overflow: "hidden" }}>
-            <Box sx={{ px: 0.8, py: 0.3, borderRight: "1px solid #d1d5db", display: "flex", alignItems: "center" }}><ChevronUp size={12} /></Box>
+          <Box sx={{ display: "flex", alignItems: "center", border: `1px solid var(--border-color)`, borderRadius: "6px", overflow: "hidden" }}>
+            <Box sx={{ px: 0.8, py: 0.3, borderRight: `1px solid var(--border-color)`, display: "flex", alignItems: "center" }}><ChevronUp size={12} /></Box>
             <Box sx={{ px: 1, py: 0.3 }}><Typography sx={{ fontSize: "0.75rem", fontWeight: 700 }}>{dataset.votes}</Typography></Box>
           </Box>
           <Typography sx={{ fontSize: "1rem", fontWeight: 800, color: PRIMARY }}>${dataset.price}</Typography>

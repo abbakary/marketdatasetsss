@@ -247,7 +247,7 @@ export default function TradePage() {
       <Box
         sx={{
           minHeight: "100vh",
-          backgroundColor: "#f8f9fb",
+          backgroundColor: "var(--bg-gray)",
           py: 4,
           position: "relative",
         }}
@@ -263,18 +263,18 @@ export default function TradePage() {
             {/* Header Section */}
             <Box sx={{ mb: 4 }}>
               <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 1 }}>
-                <Globe size={28} color="#111827" strokeWidth={2.5} />
+                <Globe size={28} color="var(--text-dark)" strokeWidth={2.5} />
                 <Typography
                   sx={{
                     fontSize: "1.8rem",
                     fontWeight: 800,
-                    color: "#111827",
+                    color: "var(--text-dark)",
                   }}
                 >
                   Global Trade Marketplace
                 </Typography>
               </Box>
-              <Typography sx={{ color: "#6b7280", fontSize: "1rem", maxWidth: "600px" }}>
+              <Typography sx={{ color: "var(--text-muted)", fontSize: "1rem", maxWidth: "600px" }}>
                 Explore comprehensive trade and commerce datasets covering global market trends, import/export data, and international business intelligence.
               </Typography>
             </Box>
@@ -290,7 +290,7 @@ export default function TradePage() {
                 onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)}
                 variant="outlined"
                 sx={{
-                  backgroundColor: "#fff",
+                  backgroundColor: "var(--bg-white)",
                   borderRadius: "10px",
                   "& .MuiOutlinedInput-root": {
                     borderRadius: "10px",
@@ -301,7 +301,7 @@ export default function TradePage() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <Search size={20} color="#111827" />
+                      <Search size={20} color="var(--text-dark)" />
                     </InputAdornment>
                   ),
                 }}
@@ -330,12 +330,12 @@ export default function TradePage() {
                       fontSize: "0.85rem",
                       height: 32,
                       px: 1.5,
-                      backgroundColor: "#fff",
-                      color: "#374151",
-                      borderColor: "#d1d5db",
+                      backgroundColor: "var(--bg-white)",
+                      color: "var(--text-dark)",
+                      borderColor: "var(--border-color)",
                       fontWeight: 500,
                       "&:hover": {
-                        backgroundColor: "#e6f7f6",
+                        backgroundColor: "var(--hover-bg)",
                       },
                     }}
                   />
@@ -362,12 +362,12 @@ export default function TradePage() {
                     fontSize: "0.82rem",
                     height: 30,
                     px: 1.5,
-                    backgroundColor: "#fff",
-                    color: "#6b7280",
-                    borderColor: "#e5e7eb",
+                    backgroundColor: "var(--bg-white)",
+                    color: "var(--text-muted)",
+                    borderColor: "var(--border-color)",
                     fontWeight: 500,
                     "&:hover": {
-                      backgroundColor: "#f3f4f6",
+                      backgroundColor: "var(--hover-bg)",
                     },
                   }}
                 />
@@ -386,12 +386,12 @@ export default function TradePage() {
               }}
             >
               <Box sx={{ display: "flex", alignItems: "center", gap: 1.2 }}>
-                <BarChart3 size={24} color="#111827" strokeWidth={2.5} />
+                <BarChart3 size={24} color="var(--text-dark)" strokeWidth={2.5} />
                 <Typography
                   sx={{
                     fontSize: "1.1rem",
                     fontWeight: 700,
-                    color: "#111827",
+                    color: "var(--text-dark)",
                   }}
                 >
                   Trade Datasets
@@ -409,13 +409,13 @@ export default function TradePage() {
                     gap: 1,
                     px: 1.5,
                     py: 0.8,
-                    backgroundColor: "#f9fafb",
+                    backgroundColor: "var(--bg-secondary)",
                     borderRadius: "8px",
                     cursor: "pointer",
-                    border: "1px solid #e5e7eb",
+                    border: `1px solid var(--border-color)`,
                     fontSize: "0.9rem",
                     fontWeight: 600,
-                    color: "#111827",
+                    color: "var(--text-dark)",
                     transition: "all 0.2s",
                     minWidth: "140px",
                     height: 40,
@@ -423,14 +423,14 @@ export default function TradePage() {
                       border: "none",
                     },
                     "&:hover": {
-                      backgroundColor: "#f3f4f6",
+                      backgroundColor: "var(--hover-bg)",
                     },
                     "&.Mui-focused": {
-                      backgroundColor: "#f3f4f6",
+                      backgroundColor: "var(--hover-bg)",
                       outline: "none",
                     },
                     "& .MuiSvgIcon-root": {
-                      color: "#6b7280",
+                      color: "var(--text-muted)",
                     },
                   }}
                 >
@@ -446,10 +446,10 @@ export default function TradePage() {
                   sx={{
                     display: "flex",
                     gap: 0.5,
-                    backgroundColor: "#f9fafb",
+                    backgroundColor: "var(--bg-secondary)",
                     borderRadius: "8px",
                     padding: "4px",
-                    border: "1px solid #e5e7eb",
+                    border: `1px solid var(--border-color)`,
                   }}
                 >
                   <Box
@@ -457,40 +457,40 @@ export default function TradePage() {
                     sx={{
                       p: 0.8,
                       borderRadius: "6px",
-                      backgroundColor: viewType === "grid" ? "#fff" : "transparent",
-                      border: viewType === "grid" ? "1px solid #e5e7eb" : "none",
+                      backgroundColor: viewType === "grid" ? "var(--bg-white)" : "transparent",
+                      border: viewType === "grid" ? `1px solid var(--border-color)` : "none",
                       cursor: "pointer",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       transition: "all 0.2s",
                       "&:hover": {
-                        backgroundColor: "#f3f4f6",
+                        backgroundColor: "var(--hover-bg)",
                       },
                     }}
                     title="Grid View"
                   >
-                    <Grid3x3 size={18} color={viewType === "grid" ? PRIMARY_COLOR : "#6b7280"} />
+                    <Grid3x3 size={18} color={viewType === "grid" ? PRIMARY_COLOR : "var(--text-muted)"} />
                   </Box>
                   <Box
                     onClick={() => setViewType("list")}
                     sx={{
                       p: 0.8,
                       borderRadius: "6px",
-                      backgroundColor: viewType === "list" ? "#fff" : "transparent",
-                      border: viewType === "list" ? "1px solid #e5e7eb" : "none",
+                      backgroundColor: viewType === "list" ? "var(--bg-white)" : "transparent",
+                      border: viewType === "list" ? `1px solid var(--border-color)` : "none",
                       cursor: "pointer",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       transition: "all 0.2s",
                       "&:hover": {
-                        backgroundColor: "#f3f4f6",
+                        backgroundColor: "var(--hover-bg)",
                       },
                     }}
                     title="List View"
                   >
-                    <List size={18} color={viewType === "list" ? PRIMARY_COLOR : "#6b7280"} />
+                    <List size={18} color={viewType === "list" ? PRIMARY_COLOR : "var(--text-muted)"} />
                   </Box>
                 </Box>
               </Box>
@@ -532,7 +532,7 @@ export default function TradePage() {
                   <Typography
                     sx={{
                       fontSize: "1rem",
-                      color: "#6b7280",
+                      color: "var(--text-muted)",
                       fontWeight: 500,
                     }}
                   >
@@ -643,8 +643,8 @@ function TradeCard({ trade, viewType = "grid" }) {
           display: "flex",
           gap: 2,
           padding: 2.5,
-          backgroundColor: "#fff",
-          border: "1px solid #e5e7eb",
+          backgroundColor: "var(--card-bg)",
+          border: `1px solid var(--border-color)`,
           borderRadius: "12px",
           transition: "all 0.3s ease",
           alignItems: "stretch",
@@ -683,7 +683,7 @@ function TradeCard({ trade, viewType = "grid" }) {
                 sx={{
                   fontSize: "0.95rem",
                   fontWeight: 700,
-                  color: "#111827",
+                  color: "var(--text-dark)",
                   cursor: "pointer",
                   transition: "color 0.2s ease",
                   flex: 1,
@@ -699,11 +699,11 @@ function TradeCard({ trade, viewType = "grid" }) {
               </IconButton>
             </Box>
 
-            <Typography sx={{ fontSize: "0.85rem", color: "#6b7280", mb: 1 }}>
+            <Typography sx={{ fontSize: "0.85rem", color: "var(--text-muted)", mb: 1 }}>
               {trade.author} · {trade.region}
             </Typography>
 
-            <Typography sx={{ fontSize: "0.8rem", color: "#111827" }}>
+            <Typography sx={{ fontSize: "0.8rem", color: "var(--text-dark)" }}>
               Visibility <b>{trade.usability}</b> · Trade Volume: <b>{trade.volume}</b>
             </Typography>
           </Box>
@@ -716,7 +716,7 @@ function TradeCard({ trade, viewType = "grid" }) {
                 alignItems: "center",
                 gap: 0.3,
                 padding: "4px 8px",
-                backgroundColor: "#f3f4f6",
+                backgroundColor: "var(--bg-secondary)",
                 borderRadius: "4px",
                 fontSize: "0.8rem",
               }}
@@ -751,8 +751,8 @@ function TradeCard({ trade, viewType = "grid" }) {
       sx={{
         borderRadius: "12px",
         overflow: "hidden",
-        backgroundColor: "#fff",
-        border: "1px solid #e5e7eb",
+        backgroundColor: "var(--card-bg)",
+        border: `1px solid var(--border-color)`,
         boxShadow: "none",
         transition: "all 0.3s ease",
         height: "100%",
@@ -875,7 +875,7 @@ function TradeCard({ trade, viewType = "grid" }) {
               fontSize: "0.98rem",
               fontWeight: 700,
               lineHeight: 1.4,
-              color: "#111827",
+              color: "var(--text-dark)",
               cursor: "pointer",
               display: "-webkit-box",
               WebkitLineClamp: 2,
@@ -900,13 +900,13 @@ function TradeCard({ trade, viewType = "grid" }) {
           <Typography
             sx={{
               fontSize: "0.85rem",
-              color: "#1f2937",
+              color: "var(--text-dark)",
               fontWeight: 500,
             }}
           >
             {trade.author}
           </Typography>
-          <Box sx={{ width: 4, height: 4, borderRadius: "50%", backgroundColor: "#d1d5db" }} />
+          <Box sx={{ width: 4, height: 4, borderRadius: "50%", backgroundColor: "var(--border-color)" }} />
           <Box
             sx={{
               display: "flex",
@@ -930,11 +930,11 @@ function TradeCard({ trade, viewType = "grid" }) {
             gap: 0.8,
             mb: 1.5,
             fontSize: "0.8rem",
-            color: "#6b7280",
+            color: "var(--text-muted)",
           }}
         >
           <Typography sx={{ fontSize: "inherit" }}>
-            Visibility <b style={{ color: "#111827" }}>{trade.usability}</b>
+            Visibility <b style={{ color: "var(--text-dark)" }}>{trade.usability}</b>
           </Typography>
           <Box sx={{ display: "flex", alignItems: "center", gap: 0.4 }}>
             <Calendar size={14} />
@@ -950,7 +950,7 @@ function TradeCard({ trade, viewType = "grid" }) {
             gap: 1.2,
             mb: 1.5,
             pb: 1.5,
-            borderBottom: "1px solid #e5e7eb",
+            borderBottom: `1px solid var(--border-color)`,
             whiteSpace: "nowrap",
             overflow: "hidden",
             width: "100%",
@@ -958,14 +958,14 @@ function TradeCard({ trade, viewType = "grid" }) {
         >
           <Box sx={{ display: "flex", alignItems: "center", gap: 0.6 }}>
             <BarChart3 size={14} color={PRIMARY_COLOR} />
-            <Typography sx={{ fontSize: "0.75rem", color: "#6b7280", fontWeight: 500 }}>
+            <Typography sx={{ fontSize: "0.75rem", color: "var(--text-muted)", fontWeight: 500 }}>
               Volume: {trade.volume}
             </Typography>
           </Box>
-          <Box sx={{ width: 4, height: 4, borderRadius: "50%", backgroundColor: "#d1d5db", flexShrink: 0 }} />
+          <Box sx={{ width: 4, height: 4, borderRadius: "50%", backgroundColor: "var(--border-color)", flexShrink: 0 }} />
           <Box sx={{ display: "flex", alignItems: "center", gap: 0.6 }}>
             <Download size={14} color={PRIMARY_COLOR} />
-            <Typography sx={{ fontSize: "0.75rem", color: "#6b7280", fontWeight: 500 }}>
+            <Typography sx={{ fontSize: "0.75rem", color: "var(--text-muted)", fontWeight: 500 }}>
               {trade.downloads}
             </Typography>
           </Box>
@@ -977,21 +977,21 @@ function TradeCard({ trade, viewType = "grid" }) {
         sx={{
           px: 2.5,
           py: 1.5,
-          borderTop: "1px solid #e5e7eb",
+          borderTop: `1px solid var(--border-color)`,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          backgroundColor: "#f9fafb",
+          backgroundColor: "var(--bg-secondary)",
         }}
       >
         <Box
           sx={{
             display: "flex",
             alignItems: "center",
-            border: "1px solid #d1d5db",
+            border: `1px solid var(--border-color)`,
             borderRadius: "6px",
             overflow: "hidden",
-            backgroundColor: "#fff",
+            backgroundColor: "var(--bg-white)",
           }}
         >
           <Box
@@ -1000,7 +1000,7 @@ function TradeCard({ trade, viewType = "grid" }) {
               py: 0.4,
               display: "flex",
               alignItems: "center",
-              borderRight: "1px solid #d1d5db",
+              borderRight: `1px solid var(--border-color)`,
             }}
           >
             <ChevronUp size={14} />

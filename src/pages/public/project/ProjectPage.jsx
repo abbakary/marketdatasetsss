@@ -200,16 +200,16 @@ export default function ProjectPage() {
 
   return (
     <PageLayout>
-      <Box sx={{ minHeight: "100vh", backgroundColor: "#f8f9fb", py: 4 }}>
+      <Box sx={{ minHeight: "100vh", backgroundColor: "var(--bg-gray)", py: 4 }}>
         <Container maxWidth="xl">
           {/* Header */}
           <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 4, flexWrap: "wrap", gap: 2 }}>
             <Box>
               <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 1 }}>
                 <FolderOpen size={28} color={PRIMARY} />
-                <Typography sx={{ fontSize: "1.8rem", fontWeight: 800, color: "#111827" }}>Project Marketplace</Typography>
+                <Typography sx={{ fontSize: "1.8rem", fontWeight: 800, color: "var(--text-dark)" }}>Project Marketplace</Typography>
               </Box>
-              <Typography sx={{ color: "#6b7280", fontSize: "1rem" }}>
+              <Typography sx={{ color: "var(--text-muted)", fontSize: "1rem" }}>
                 Discover and invest in high-quality dataset projects. Request collaboration or purchase ownership of innovative data initiatives.
               </Typography>
             </Box>
@@ -224,12 +224,12 @@ export default function ProjectPage() {
           {/* Stats */}
           <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr 1fr", md: "repeat(4,1fr)" }, gap: 2, mb: 4 }}>
             {projectStats.map(s => (
-              <Card key={s.label} sx={{ borderRadius: 2, border: "1px solid #e5e7eb", boxShadow: "none" }}>
+              <Card key={s.label} sx={{ borderRadius: 2, border: `1px solid var(--border-color)`, boxShadow: "none" }}>
                 <CardContent sx={{ p: 2.5 }}>
                   <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                     <Box>
-                      <Typography sx={{ fontSize: "0.8rem", color: "#6b7280", mb: 0.5 }}>{s.label}</Typography>
-                      <Typography sx={{ fontSize: "1.6rem", fontWeight: 800, color: "#111827" }}>{s.value}</Typography>
+                      <Typography sx={{ fontSize: "0.8rem", color: "var(--text-muted)", mb: 0.5 }}>{s.label}</Typography>
+                      <Typography sx={{ fontSize: "1.6rem", fontWeight: 800, color: "var(--text-dark)" }}>{s.value}</Typography>
                       <Box sx={{ display: "flex", alignItems: "center", gap: 0.5, mt: 0.5 }}>
                         <ArrowUpRight size={13} color="#16a34a" />
                         <Typography sx={{ fontSize: "0.78rem", color: "#16a34a", fontWeight: 600 }}>{s.change}</Typography>
@@ -244,7 +244,7 @@ export default function ProjectPage() {
 
           {/* Search */}
           <TextField fullWidth placeholder="Search projects, tags, contributors..." value={search} onChange={e => setSearch(e.target.value)} variant="outlined"
-            sx={{ mb: 3, backgroundColor: "#fff", borderRadius: "10px", "& .MuiOutlinedInput-root": { borderRadius: "10px", height: 50, fontSize: '0.95rem' } }}
+            sx={{ mb: 3, backgroundColor: "var(--bg-white)", borderRadius: "10px", "& .MuiOutlinedInput-root": { borderRadius: "10px", height: 50, fontSize: '0.95rem' } }}
             InputProps={{
               startAdornment: <InputAdornment position="start"><Search size={20} color="#111827" /></InputAdornment>,
               endAdornment: (
@@ -275,14 +275,14 @@ export default function ProjectPage() {
             <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
               {categories.map(cat => (
                 <Chip key={cat} label={cat} onClick={() => setSelectedCategory(cat)} variant={selectedCategory === cat ? "filled" : "outlined"}
-                  sx={{ borderRadius: "6px", fontSize: "0.82rem", height: 30, backgroundColor: selectedCategory === cat ? PRIMARY : "#fff", color: selectedCategory === cat ? "#fff" : "#374151", borderColor: "#d1d5db", "&:hover": { backgroundColor: selectedCategory === cat ? PRIMARY : "#e6f7f6" } }}
+                  sx={{ borderRadius: "6px", fontSize: "0.82rem", height: 30, backgroundColor: selectedCategory === cat ? PRIMARY : "var(--bg-white)", color: selectedCategory === cat ? "#fff" : "var(--text-dark)", borderColor: "var(--border-color)", "&:hover": { backgroundColor: selectedCategory === cat ? PRIMARY : "var(--hover-bg)" } }}
                 />
               ))}
             </Box>
             <Box sx={{ display: "flex", gap: 1 }}>
               {statuses.map(s => (
                 <Chip key={s} label={s} onClick={() => setSelectedStatus(s)} variant={selectedStatus === s ? "filled" : "outlined"}
-                  sx={{ borderRadius: "6px", fontSize: "0.82rem", height: 30, backgroundColor: selectedStatus === s ? "#111827" : "#fff", color: selectedStatus === s ? "#fff" : "#374151", borderColor: "#d1d5db" }}
+                  sx={{ borderRadius: "6px", fontSize: "0.82rem", height: 30, backgroundColor: selectedStatus === s ? "var(--text-dark)" : "var(--bg-white)", color: selectedStatus === s ? "#fff" : "var(--text-dark)", borderColor: "var(--border-color)" }}
                 />
               ))}
             </Box>
@@ -302,8 +302,8 @@ export default function ProjectPage() {
 
           {filtered.length === 0 && (
             <Box sx={{ textAlign: "center", py: 8 }}>
-              <FolderOpen size={48} color="#d1d5db" style={{ margin: "0 auto 16px" }} />
-              <Typography sx={{ color: "#6b7280" }}>No projects found</Typography>
+              <FolderOpen size={48} color="var(--border-color)" style={{ margin: "0 auto 16px" }} />
+              <Typography sx={{ color: "var(--text-muted)" }}>No projects found</Typography>
             </Box>
           )}
 
@@ -538,7 +538,7 @@ function ProjectDatasetCard({ dataset, onOpen, onVote }) {
   const sc = statusColors[dataset.status] || statusColors.Active;
 
   return (
-    <Card sx={{ borderRadius: "12px", overflow: "hidden", border: "1px solid #e5e7eb", boxShadow: "none", transition: "all 0.3s ease", cursor: "pointer", "&:hover": { transform: "translateY(-4px)", boxShadow: "0 10px 24px rgba(97,197,195,0.12)", borderColor: PRIMARY } }} onClick={onOpen}>
+    <Card sx={{ borderRadius: "12px", overflow: "hidden", border: `1px solid var(--border-color)`, boxShadow: "none", transition: "all 0.3s ease", cursor: "pointer", "&:hover": { transform: "translateY(-4px)", boxShadow: "0 10px 24px rgba(97,197,195,0.12)", borderColor: PRIMARY } }} onClick={onOpen}>
       {/* Image */}
       <Box sx={{ height: 160, backgroundImage: `url(${dataset.image})`, backgroundSize: "cover", backgroundPosition: "center", position: "relative" }}>
         <Box sx={{ position: "absolute", top: 8, left: 8, px: 1, py: 0.3, borderRadius: 1, backgroundColor: sc.bg, border: `1px solid ${sc.border}` }}>
@@ -557,24 +557,24 @@ function ProjectDatasetCard({ dataset, onOpen, onVote }) {
 
       <CardContent sx={{ p: 2.5 }}>
         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 1, mb: 0.5 }}>
-          <Typography sx={{ fontSize: "0.95rem", fontWeight: 700, color: "#111827", lineHeight: 1.4, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{dataset.title}</Typography>
+          <Typography sx={{ fontSize: "0.95rem", fontWeight: 700, color: "var(--text-dark)", lineHeight: 1.4, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{dataset.title}</Typography>
           <IconButton size="small" sx={{ p: 0.5 }}>
-            <MoreVertical size={16} color="#9ca3af" />
+            <MoreVertical size={16} color="var(--text-muted)" />
           </IconButton>
         </Box>
-        
+
         <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}>
           <Typography sx={{ fontSize: "0.75rem", color: SECONDARY, fontWeight: 700, backgroundColor: `${SECONDARY}10`, px: 1, py: 0.2, borderRadius: 1 }}>
             {dataset.projectType || "General Project"}
           </Typography>
-          <Typography sx={{ fontSize: "0.75rem", color: "#6b7280" }}>{dataset.author}</Typography>
+          <Typography sx={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>{dataset.author}</Typography>
         </Box>
 
         {/* Tags */}
         <Box sx={{ display: "flex", gap: 0.6, flexWrap: "wrap", mb: 1.2 }}>
           {dataset.tags.slice(0, 3).map(tag => (
-            <Box key={tag} sx={{ px: 0.8, py: 0.2, borderRadius: 1, backgroundColor: "#f3f4f6" }}>
-              <Typography sx={{ fontSize: "0.7rem", color: "#6b7280" }}>#{tag}</Typography>
+            <Box key={tag} sx={{ px: 0.8, py: 0.2, borderRadius: 1, backgroundColor: "var(--bg-secondary)" }}>
+              <Typography sx={{ fontSize: "0.7rem", color: "var(--text-muted)" }}>#{tag}</Typography>
             </Box>
           ))}
         </Box>
@@ -582,33 +582,33 @@ function ProjectDatasetCard({ dataset, onOpen, onVote }) {
         {/* Progress */}
         <Box sx={{ mb: 1.5 }}>
           <Box sx={{ display: "flex", justifyContent: "space-between", mb: 0.5 }}>
-            <Typography sx={{ fontSize: "0.75rem", color: "#6b7280" }}>Progress</Typography>
+            <Typography sx={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>Progress</Typography>
             <Typography sx={{ fontSize: "0.75rem", fontWeight: 700, color: dataset.progress === 100 ? "#16a34a" : PRIMARY }}>{dataset.progress}%</Typography>
           </Box>
-          <LinearProgress variant="determinate" value={dataset.progress} sx={{ height: 5, borderRadius: 3, backgroundColor: "#e5e7eb", "& .MuiLinearProgress-bar": { backgroundColor: dataset.progress === 100 ? "#16a34a" : PRIMARY, borderRadius: 3 } }} />
+          <LinearProgress variant="determinate" value={dataset.progress} sx={{ height: 5, borderRadius: 3, backgroundColor: "var(--border-color)", "& .MuiLinearProgress-bar": { backgroundColor: dataset.progress === 100 ? "#16a34a" : PRIMARY, borderRadius: 3 } }} />
         </Box>
 
         {/* File Details */}
-        <Box sx={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 0.6, mb: 1.5, pb: 1.5, borderBottom: "1px solid #e5e7eb" }}>
+        <Box sx={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 0.6, mb: 1.5, pb: 1.5, borderBottom: `1px solid var(--border-color)` }}>
           {[{ icon: <FileIcon size={12} color={PRIMARY} />, label: dataset.files }, { icon: <HardDrive size={12} color={PRIMARY} />, label: dataset.size }, { icon: <Download size={12} color={PRIMARY} />, label: dataset.downloads }].map((item, i) => (
-            <Box key={i} sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 0.3, p: 0.6, borderRadius: 1, backgroundColor: "#f9fafb" }}>
+            <Box key={i} sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 0.3, p: 0.6, borderRadius: 1, backgroundColor: "var(--bg-secondary)" }}>
               {item.icon}
-              <Typography sx={{ fontSize: "0.62rem", color: "#6b7280", textAlign: "center", lineHeight: 1.2 }}>{item.label}</Typography>
+              <Typography sx={{ fontSize: "0.62rem", color: "var(--text-muted)", textAlign: "center", lineHeight: 1.2 }}>{item.label}</Typography>
             </Box>
           ))}
         </Box>
 
         {/* Footer */}
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <Box sx={{ display: "flex", gap: 2, fontSize: "0.78rem", color: "#6b7280" }}>
+          <Box sx={{ display: "flex", gap: 2, fontSize: "0.78rem", color: "var(--text-muted)" }}>
             <Box sx={{ display: "flex", alignItems: "center", gap: 0.4 }}><Users size={12} /><span>{dataset.contributors}</span></Box>
             <Box sx={{ display: "flex", alignItems: "center", gap: 0.4 }}><Star size={12} /><span>{dataset.stars}</span></Box>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <Box
               onClick={onVote}
-              sx={{ display: "flex", alignItems: "center", border: "1px solid #d1d5db", borderRadius: "6px", overflow: "hidden", cursor: "pointer", "&:hover": { borderColor: PRIMARY, backgroundColor: "#f0fdfa" } }}>
-              <Box sx={{ px: 0.8, py: 0.3, borderRight: "1px solid #d1d5db", display: "flex", alignItems: "center" }}><ChevronUp size={12} color={PRIMARY} /></Box>
+              sx={{ display: "flex", alignItems: "center", border: `1px solid var(--border-color)`, borderRadius: "6px", overflow: "hidden", cursor: "pointer", "&:hover": { borderColor: PRIMARY, backgroundColor: "#f0fdfa" } }}>
+              <Box sx={{ px: 0.8, py: 0.3, borderRight: `1px solid var(--border-color)`, display: "flex", alignItems: "center" }}><ChevronUp size={12} color={PRIMARY} /></Box>
               <Box sx={{ px: 1, py: 0.3 }}><Typography sx={{ fontSize: "0.75rem", fontWeight: 700 }}>{dataset.votes}</Typography></Box>
             </Box>
             <Button size="small" variant="outlined"
