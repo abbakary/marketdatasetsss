@@ -25,10 +25,10 @@ const budgetDatasets = [
 ];
 
 const pricingTiers = [
-  { name: "Basic", range: "$0 – $199", color: "#22c55e", bg: "#f0fdf4", border: "#bbf7d0", features: ["Single user license", "CSV format", "Email support", "6-month access"] },
-  { name: "Standard", range: "$200 – $499", color: "#3b82f6", bg: "#eff6ff", border: "#bfdbfe", features: ["Up to 5 users", "Multiple formats", "Priority support", "1-year access", "API access"] },
-  { name: "Premium", range: "$500 – $799", color: "#8b5cf6", bg: "#f5f3ff", border: "#ddd6fe", features: ["Up to 20 users", "All formats", "Dedicated support", "2-year access", "API + webhooks", "Custom exports"] },
-  { name: "Enterprise", range: "$800+", color: "#f59e0b", bg: "#fffbeb", border: "#fde68a", features: ["Unlimited users", "All formats", "24/7 support", "Lifetime access", "Full API suite", "White-label rights", "SLA guarantee"] },
+  { name: "Basic", price: "$200/month", color: "#22c55e", bg: "#f0fdf4", border: "#bbf7d0", features: ["Email notifications only", "Single user license", "Basic support", "30-day access"] },
+  { name: "Standard", price: "$5000/month", color: "#3b82f6", bg: "#eff6ff", border: "#bfdbfe", features: ["Up to 5 users", "Multiple formats", "Priority support", "Unlimited access", "API access"] },
+  { name: "Premium", price: "$15000/month", color: "#8b5cf6", bg: "#f5f3ff", border: "#ddd6fe", features: ["Up to 20 users", "All formats", "Dedicated support", "Unlimited access", "API + webhooks", "Custom exports"] },
+  { name: "Enterprise", price: "$3000/month", color: "#f59e0b", bg: "#fffbeb", border: "#fde68a", features: ["Unlimited users", "All formats", "24/7 support", "Unlimited access", "Full API suite", "Custom integrations", "SLA guarantee"] },
 ];
 
 export default function BudgetPage() {
@@ -127,15 +127,16 @@ export default function BudgetPage() {
                 </CardContent>
               </Card>
 
-              {/* Pricing Tiers Info */}
+              {/* Subscription Plans */}
               <Card sx={{ borderRadius: 2, border: "1px solid #e5e7eb", boxShadow: "none" }}>
                 <CardContent sx={{ p: 2.5 }}>
-                  <Typography sx={{ fontWeight: 700, color: "#111827", mb: 1.5 }}>Tier Comparison</Typography>
+                  <Typography sx={{ fontWeight: 700, color: "#111827", mb: 1.5 }}>Subscription Plans</Typography>
+                  <Typography sx={{ fontSize: "0.75rem", color: "#6b7280", mb: 2 }}>Choose a plan that works for you</Typography>
                   {pricingTiers.map(tier => (
                     <Box key={tier.name} sx={{ mb: 2, p: 1.5, borderRadius: 1.5, backgroundColor: tier.bg, border: `1px solid ${tier.border}` }}>
-                      <Box sx={{ display: "flex", justifyContent: "space-between", mb: 0.8 }}>
+                      <Box sx={{ display: "flex", justifyContent: "space-between", mb: 0.8, alignItems: "center" }}>
                         <Typography sx={{ fontWeight: 700, color: tier.color, fontSize: "0.9rem" }}>{tier.name}</Typography>
-                        <Typography sx={{ fontSize: "0.8rem", color: "#6b7280" }}>{tier.range}</Typography>
+                        <Typography sx={{ fontSize: "0.75rem", fontWeight: 700, color: tier.color }}>{tier.price}</Typography>
                       </Box>
                       {tier.features.slice(0, 3).map(f => (
                         <Box key={f} sx={{ display: "flex", alignItems: "center", gap: 0.8, mb: 0.3 }}>
