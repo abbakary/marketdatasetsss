@@ -6,8 +6,9 @@ import { DatasetCard, allDatasets } from './lib/DatasetCard';
 import { buyerStats, mockPurchases } from './lib/mockData';
 import { ShoppingCart, Heart, DollarSign, TrendingUp, Download, Eye } from 'lucide-react';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
+import { useThemeColors } from '../../utils/useThemeColors';
+import { useChartColors } from '../../utils/useChartColors';
 
-const tt = { backgroundColor: '#fff', border: '1px solid #e2e8f0', borderRadius: 12, color: '#1a202c', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' };
 const Badge = ({ children, style }) => <span style={{ padding: '2px 8px', borderRadius: 4, fontSize: 12, fontWeight: 500, ...style }}>{children}</span>;
 const budgetData = [
    { name: 'Used', value: buyerStats.budgetUsed },
@@ -18,19 +19,21 @@ const COLORS = ['#FF8C00', '#20B2AA'];
 const approvedDatasets = allDatasets.filter(d => d.status === 'approved');
 
 export default function BuyerDashboard() {
+   const themeColors = useThemeColors();
+   const chartColors = useChartColors();
    const [wishlist, setWishlist] = useState([]);
    const budgetPct = (buyerStats.budgetUsed / buyerStats.budgetLimit) * 100;
 
-   const statusStyle = s => s === 'completed' ? { background: '#f0fff4', color: '#38a169', border: '1px solid #c6f6d5' } : s === 'pending' ? { background: '#fffaf0', color: '#dd6b20', border: '1px solid #feebc8' } : { background: '#fff5f5', color: '#e53e3e', border: '1px solid #fed7d7' };
+   const statusStyle = s => s === 'completed' ? { background: 'rgba(16, 185, 129, 0.15)', color: '#10B981', border: `1px solid ${themeColors.border}` } : s === 'pending' ? { background: 'rgba(245, 158, 11, 0.15)', color: '#F59E0B', border: `1px solid ${themeColors.border}` } : { background: 'rgba(239, 68, 68, 0.15)', color: '#EF4444', border: `1px solid ${themeColors.border}` };
 
    return (
       <DashboardLayout role="buyer">
          <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
             {/* Welcome Banner */}
-            <div style={{ borderRadius: 24, background: '#fff', border: '1px solid #e2e8f0', padding: 40, color: '#1a202c', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.05)', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ borderRadius: 24, backgroundColor: themeColors.card, border: `1px solid ${themeColors.border}`, padding: 40, color: themeColors.text, boxShadow: themeColors.isDarkMode ? '0 20px 25px -5px rgba(0,0,0,0.3)' : '0 20px 25px -5px rgba(0,0,0,0.05)', position: 'relative', overflow: 'hidden' }}>
                <div style={{ position: 'relative', zIndex: 1 }}>
-                  <h2 style={{ fontSize: 36, fontWeight: 800, margin: 0, letterSpacing: '-0.02em', color: '#1a202c' }}>Welcome back, <span style={{ color: '#FF8C00' }}>{buyerStats.name || 'Explorer'}!</span></h2>
-                  <p style={{ color: '#718096', marginTop: 8, marginBottom: 0, fontSize: 18, fontWeight: 500 }}>Find the perfect data for your next project.</p>
+                  <h2 style={{ fontSize: 36, fontWeight: 800, margin: 0, letterSpacing: '-0.02em', color: themeColors.text }}>Welcome back, <span style={{ color: '#FF8C00' }}>{buyerStats.name || 'Explorer'}!</span></h2>
+                  <p style={{ color: themeColors.textMuted, marginTop: 8, marginBottom: 0, fontSize: 18, fontWeight: 500 }}>Find the perfect data for your next project.</p>
                </div>
                <div style={{ position: 'absolute', top: -50, right: -50, width: 200, height: 200, background: 'linear-gradient(135deg, #FF8C00 0%, transparent 70%)', opacity: 0.1, borderRadius: '50%' }} />
                <div style={{ position: 'absolute', bottom: -50, left: 100, width: 150, height: 150, background: 'linear-gradient(135deg, #20B2AA 0%, transparent 70%)', opacity: 0.1, borderRadius: '50%' }} />

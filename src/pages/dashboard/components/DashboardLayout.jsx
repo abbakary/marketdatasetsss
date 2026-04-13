@@ -5,6 +5,7 @@ import {
   ShoppingCart, Heart, ListChecks, Package, Eye, Bookmark, History, FileText,
   Menu, X, LogOut, Bell, Search, ChevronDown, ChevronRight, User, Zap, Send,
 } from 'lucide-react';
+import { useThemeColors } from '../../../utils/useThemeColors';
 import logo from '../../../assets/dali-data-logo.png';
 
 const TOKEN_KEY = 'dali-token';
@@ -84,13 +85,28 @@ export default function DashboardLayout({ children, role }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const themeColors = useThemeColors();
 
   const user = (() => {
     try { return JSON.parse(localStorage.getItem(USER_KEY) || 'null'); } catch { return null; }
   })();
 
   const navItems = roleNavItems[role] || roleNavItems.viewer;
-  const colors = themeColors;
+  const colors = {
+    header: "#FF8C00", // Vibrant Orange
+    toolbar: "#20B2AA", // Teal
+    sidebar: themeColors.bgPanel,
+    background: themeColors.bg,
+    accent: "#FF8C00",
+    secondary: "#20B2AA",
+    text: themeColors.text,
+    activeBg: "linear-gradient(135deg, #FF8C00 0%, #FFA500 100%)",
+    activeText: "#FFFFFF",
+    sidebarText: themeColors.isDarkMode ? "rgba(255, 255, 255, 0.7)" : "rgba(0, 0, 0, 0.6)",
+    sidebarActiveText: "#FFFFFF",
+    sidebarBorder: themeColors.isDarkMode ? "rgba(255, 255, 255, 0.1)" : "#e2e8f0",
+    sidebarBg: themeColors.isDarkMode ? "#1E293B" : "#FFFFFF"
+  };
   const currentRoleStyle = roleStyles[role] || roleStyles.viewer;
   const title = roleTitles[role] || 'Dashboard';
 
@@ -99,7 +115,7 @@ export default function DashboardLayout({ children, role }) {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: colors.background, color: colors.text }}>
+    <div style={{ minHeight: '100vh', backgroundColor: colors.background, color: colors.text, transition: 'all 0.3s ease' }}>
       <style>{`
         @keyframes slideIn {
           from { opacity: 0; transform: translateX(20px); }
@@ -150,24 +166,24 @@ export default function DashboardLayout({ children, role }) {
       {/* Sidebar - Right Side */}
       <aside style={{
         position: 'fixed', top: 0, right: 0, zIndex: 50, height: '100%', width: 256,
-        background: colors.sidebar,
-        borderLeft: '1px solid #f1f5f9',
+        background: colors.sidebarBg,
+        borderLeft: `1px solid ${colors.sidebarBorder}`,
         transform: sidebarOpen ? 'translateX(0)' : 'translateX(100%)',
-        transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+        transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease',
         display: 'flex', flexDirection: 'column',
-        boxShadow: '-10px 0 30px rgba(0,0,0,0.03)',
+        boxShadow: themeColors.isDarkMode ? '-10px 0 30px rgba(0,0,0,0.3)' : '-10px 0 30px rgba(0,0,0,0.03)',
       }}
         className="lg-sidebar"
       >
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72, padding: '0 20px', borderBottom: '1px solid #f1f5f9' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72, padding: '0 20px', borderBottom: `1px solid ${colors.sidebarBorder}` }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.05)' } }}>
               <img src={logo} alt="DaliData Logo" style={{ height: 36, width: 'auto', objectFit: 'contain', display: 'block' }} />
             </Link>
           </div>
-          <button onClick={() => setSidebarOpen(false)} style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#64748b', cursor: 'pointer', padding: 6, borderRadius: 10, display: 'flex', transition: 'all 0.2s' }}
+          <button onClick={() => setSidebarOpen(false)} style={{ backgroundColor: colors.bgSecondary, border: `1px solid ${colors.border}`, color: colors.textMuted, cursor: 'pointer', padding: 6, borderRadius: 10, display: 'flex', transition: 'all 0.2s' }}
             onMouseEnter={e => { e.currentTarget.style.color = '#ef4444'; e.currentTarget.style.borderColor = '#fee2e2'; }}
-            onMouseLeave={e => { e.currentTarget.style.color = '#64748b'; e.currentTarget.style.borderColor = '#e2e8f0'; }}
+            onMouseLeave={e => { e.currentTarget.style.color = colors.textMuted; e.currentTarget.style.borderColor = colors.border; }}
           >
             <X size={18} />
           </button>
@@ -187,10 +203,11 @@ export default function DashboardLayout({ children, role }) {
                   display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px',
                   borderRadius: 14, fontSize: 14, fontWeight: isActive ? 700 : 500, textDecoration: 'none',
                   background: isActive ? currentRoleStyle.primary : 'transparent',
-                  color: isActive ? '#fff' : '#64748b',
+                  color: isActive ? '#fff' : colors.sidebarText,
                   animation: `slideIn 0.4s ease forwards ${index * 0.05}s`,
                   opacity: 0,
                   zIndex: 1,
+                  transition: 'all 0.3s ease'
                 }}
               >
                 <div style={{
@@ -210,7 +227,7 @@ export default function DashboardLayout({ children, role }) {
         </nav>
 
         {/* Sidebar Footer - User Account */}
-        <div style={{ padding: 20, borderTop: '1px solid #f1f5f9', background: '#f8fafc', borderBottomRightRadius: 0 }}>
+        <div style={{ padding: 20, borderTop: `1px solid ${colors.sidebarBorder}`, backgroundColor: colors.bgSecondary, borderBottomRightRadius: 0, transition: 'all 0.3s ease' }}>
            <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 20 }}>
               <div style={{ 
                  width: 48, height: 48, borderRadius: 16, 
@@ -223,7 +240,7 @@ export default function DashboardLayout({ children, role }) {
                  {user?.name ? user.name.split(' ').map(n => n[0]).join('').toUpperCase() : role[0].toUpperCase()}
               </div>
               <div style={{ overflow: 'hidden' }}>
-                 <div style={{ fontSize: 15, fontWeight: 800, color: '#1e293b', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{user?.name || 'User'}</div>
+                 <div style={{ fontSize: 15, fontWeight: 800, color: colors.text, whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{user?.name || 'User'}</div>
                  <div style={{ 
                     display: 'inline-block', fontSize: 10, fontWeight: 700, 
                     color: currentRoleStyle.primary, background: `${currentRoleStyle.primary}15`,
@@ -238,14 +255,14 @@ export default function DashboardLayout({ children, role }) {
            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
               <button
                 onClick={() => { setSidebarOpen(false); navigate('/profile'); }}
-                style={{ 
-                  display: 'flex', alignItems: 'center', gap: 12, width: '100%', padding: '10px 14px', 
-                  background: '#fff', border: '1px solid #e2e8f0', cursor: 'pointer', fontSize: 13, 
-                  color: '#475569', borderRadius: 12, fontWeight: 600, transition: 'all 0.2s',
-                  boxShadow: '0 2px 4px rgba(0,0,0,0.02)'
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 12, width: '100%', padding: '10px 14px',
+                  backgroundColor: colors.card, border: `1px solid ${colors.border}`, cursor: 'pointer', fontSize: 13,
+                  color: colors.textMuted, borderRadius: 12, fontWeight: 600, transition: 'all 0.2s',
+                  boxShadow: themeColors.isDarkMode ? '0 2px 4px rgba(0,0,0,0.2)' : '0 2px 4px rgba(0,0,0,0.02)'
                 }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = currentRoleStyle.primary; e.currentTarget.style.color = currentRoleStyle.primary; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = '#e2e8f0'; e.currentTarget.style.color = '#475569'; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = colors.border; e.currentTarget.style.color = colors.textMuted; }}
               >
                 <User size={18} /> Profile Details
               </button>
@@ -272,7 +289,9 @@ export default function DashboardLayout({ children, role }) {
         {/* Header */}
         <header style={{
           position: 'sticky', top: 0, zIndex: 30,
-          background: colors.header, boxShadow: '0 4px 20px rgba(255,140,0,0.15)',
+          background: colors.header,
+          boxShadow: themeColors.isDarkMode ? '0 4px 20px rgba(255,140,0,0.3)' : '0 4px 20px rgba(255,140,0,0.15)',
+          transition: 'all 0.3s ease'
         }}>
           <div style={{ display: 'flex', height: 72, alignItems: 'center', justifyContent: 'space-between', padding: '0 32px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
@@ -312,7 +331,7 @@ export default function DashboardLayout({ children, role }) {
           </div>
 
           {/* Subheader */}
-          <div style={{ height: 52, background: colors.toolbar, display: 'flex', alignItems: 'center', padding: '0 32px', boxShadow: 'inset 0 2px 10px rgba(0,0,0,0.05)' }}>
+          <div style={{ height: 52, background: colors.toolbar, display: 'flex', alignItems: 'center', padding: '0 32px', boxShadow: themeColors.isDarkMode ? 'inset 0 2px 10px rgba(0,0,0,0.3)' : 'inset 0 2px 10px rgba(0,0,0,0.05)' }}>
              <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
                 <Link to={location.pathname} style={{ color: '#fff', fontSize: 14, fontWeight: 700, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.15)', padding: '6px 14px', borderRadius: 10 }}>
                    <LayoutDashboard size={16} /> Overview
@@ -326,7 +345,7 @@ export default function DashboardLayout({ children, role }) {
         </header>
 
         {/* Page content */}
-        <main style={{ padding: '32px', width: '100%', boxSizing: 'border-box', maxWidth: '1600px', margin: '0 auto' }}>
+        <main style={{ padding: '32px', width: '100%', boxSizing: 'border-box', maxWidth: '1600px', margin: '0 auto', backgroundColor: colors.background, transition: 'all 0.3s ease' }}>
           {children}
         </main>
       </div>
