@@ -4,8 +4,9 @@ export default function Footer() {
       style={{
         textAlign: "center",
         padding: "10px 8px",
-        background: "#F6F8FC",
-        borderTop: "1px solid rgba(15,23,42,0.08)",
+        background: "var(--card-bg)",
+        borderTop: "1px solid var(--border-color)",
+        transition: "background-color 0.3s ease, border-color 0.3s ease",
       }}
     >
       <div
@@ -18,8 +19,9 @@ export default function Footer() {
       >
         <span
           style={{
-            color: "#04121D",
+            color: "var(--text-dark)",
             fontSize: "0.8rem",
+            transition: "color 0.3s ease",
           }}
         >
           © {new Date().getFullYear()}{" "}

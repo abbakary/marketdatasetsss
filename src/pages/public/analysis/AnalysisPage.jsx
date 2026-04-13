@@ -55,17 +55,17 @@ export default function AnalysisPage() {
 
   return (
     <PageLayout>
-      <Box sx={{ minHeight: "100vh", backgroundColor: "#f8f9fb", py: 4 }}>
+      <Box sx={{ minHeight: "100vh", backgroundColor: "var(--bg-gray)", py: 4, transition: "background-color 0.3s ease" }}>
         <Container maxWidth="xl">
           {/* Header */}
           <Box sx={{ mb: 4 }}>
             <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 1 }}>
               <BarChart3 size={28} color={PRIMARY} />
-              <Typography sx={{ fontSize: "1.8rem", fontWeight: 800, color: "#111827" }}>
+              <Typography sx={{ fontSize: "1.8rem", fontWeight: 800, color: "var(--text-dark)", transition: "color 0.3s ease" }}>
                 Dataset Analysis
               </Typography>
             </Box>
-            <Typography sx={{ color: "#6b7280", fontSize: "1rem" }}>
+            <Typography sx={{ color: "var(--text-muted)", fontSize: "1rem", transition: "color 0.3s ease" }}>
               Explore analytical datasets, performance benchmarks, and data-driven insights
             </Typography>
           </Box>
@@ -77,9 +77,9 @@ export default function AnalysisPage() {
             value={search}
             onChange={e => setSearch(e.target.value)}
             variant="outlined"
-            sx={{ mb: 4, backgroundColor: "#fff", borderRadius: "10px", "& .MuiOutlinedInput-root": { borderRadius: "10px", height: 50 } }}
+            sx={{ mb: 4, backgroundColor: "var(--card-bg)", borderRadius: "10px", "& .MuiOutlinedInput-root": { borderRadius: "10px", height: 50 }, transition: "background-color 0.3s ease" }}
             InputProps={{
-              startAdornment: <InputAdornment position="start"><Search size={20} color="#6b7280" /></InputAdornment>,
+              startAdornment: <InputAdornment position="start"><Search size={20} color="var(--text-muted)" /></InputAdornment>,
               endAdornment: <InputAdornment position="end"><Box sx={{ display: "flex", alignItems: "center", gap: 1, color: PRIMARY, cursor: "pointer" }}><SlidersHorizontal size={18} /><Typography sx={{ fontSize: "0.9rem", fontWeight: 600, color: PRIMARY }}>Filters</Typography></Box></InputAdornment>,
             }}
           />
@@ -87,18 +87,18 @@ export default function AnalysisPage() {
           {/* Metrics Row */}
           <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr 1fr", md: "repeat(4,1fr)" }, gap: 2, mb: 4 }}>
             {topMetrics.map(m => (
-              <Card key={m.label} sx={{ borderRadius: 2, border: "1px solid #e5e7eb", boxShadow: "none" }}>
+              <Card key={m.label} sx={{ borderRadius: 2, border: "1px solid var(--border-color)", boxShadow: "none", transition: "all 0.3s ease" }}>
                 <CardContent sx={{ p: 2.5 }}>
                   <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                     <Box>
-                      <Typography sx={{ fontSize: "0.8rem", color: "#6b7280", mb: 0.5 }}>{m.label}</Typography>
-                      <Typography sx={{ fontSize: "1.6rem", fontWeight: 800, color: "#111827" }}>{m.value}</Typography>
+                      <Typography sx={{ fontSize: "0.8rem", color: "var(--text-muted)", mb: 0.5, transition: "color 0.3s ease" }}>{m.label}</Typography>
+                      <Typography sx={{ fontSize: "1.6rem", fontWeight: 800, color: "var(--text-dark)", transition: "color 0.3s ease" }}>{m.value}</Typography>
                       <Box sx={{ display: "flex", alignItems: "center", gap: 0.5, mt: 0.5 }}>
                         {m.up ? <ArrowUpRight size={14} color="#16a34a" /> : <ArrowDownRight size={14} color="#dc2626" />}
                         <Typography sx={{ fontSize: "0.8rem", color: m.up ? "#16a34a" : "#dc2626", fontWeight: 600 }}>{m.change}</Typography>
                       </Box>
                     </Box>
-                    <Box sx={{ p: 1.2, borderRadius: 2, backgroundColor: "#e6f7f6" }}>{m.icon}</Box>
+                    <Box sx={{ p: 1.2, borderRadius: 2, backgroundColor: "rgba(32, 178, 170, 0.1)" }}>{m.icon}</Box>
                   </Box>
                 </CardContent>
               </Card>
@@ -106,21 +106,21 @@ export default function AnalysisPage() {
           </Box>
 
           {/* Category Performance */}
-          <Card sx={{ borderRadius: 2, border: "1px solid #e5e7eb", boxShadow: "none", mb: 4 }}>
+          <Card sx={{ borderRadius: 2, border: "1px solid var(--border-color)", boxShadow: "none", mb: 4, transition: "all 0.3s ease" }}>
             <CardContent sx={{ p: 3 }}>
-              <Typography sx={{ fontSize: "1.1rem", fontWeight: 700, color: "#111827", mb: 2.5 }}>Category Performance</Typography>
+              <Typography sx={{ fontSize: "1.1rem", fontWeight: 700, color: "var(--text-dark)", mb: 2.5, transition: "color 0.3s ease" }}>Category Performance</Typography>
               <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "repeat(2,1fr)", lg: "repeat(3,1fr)" }, gap: 2 }}>
                 {categoryStats.map(cat => (
-                  <Box key={cat.name} sx={{ p: 2, borderRadius: 2, border: "1px solid #f3f4f6", backgroundColor: "#fafafa" }}>
+                  <Box key={cat.name} sx={{ p: 2, borderRadius: 2, border: "1px solid var(--border-color)", backgroundColor: "var(--bg-secondary)", transition: "all 0.3s ease" }}>
                     <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 1 }}>
-                      <Typography sx={{ fontSize: "0.9rem", fontWeight: 600, color: "#111827" }}>{cat.name}</Typography>
+                      <Typography sx={{ fontSize: "0.9rem", fontWeight: 600, color: "var(--text-dark)", transition: "color 0.3s ease" }}>{cat.name}</Typography>
                       <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
                         <TrendingUp size={14} color="#16a34a" />
                         <Typography sx={{ fontSize: "0.8rem", color: "#16a34a", fontWeight: 600 }}>+{cat.growth}%</Typography>
                       </Box>
                     </Box>
-                    <LinearProgress variant="determinate" value={(cat.datasets / 84) * 100} sx={{ height: 6, borderRadius: 3, backgroundColor: "#e5e7eb", "& .MuiLinearProgress-bar": { backgroundColor: cat.color, borderRadius: 3 } }} />
-                    <Typography sx={{ fontSize: "0.75rem", color: "#6b7280", mt: 0.8 }}>{cat.datasets} datasets</Typography>
+                    <LinearProgress variant="determinate" value={(cat.datasets / 84) * 100} sx={{ height: 6, borderRadius: 3, backgroundColor: "var(--border-color)", "& .MuiLinearProgress-bar": { backgroundColor: cat.color, borderRadius: 3 } }} />
+                    <Typography sx={{ fontSize: "0.75rem", color: "var(--text-muted)", mt: 0.8, transition: "color 0.3s ease" }}>{cat.datasets} datasets</Typography>
                   </Box>
                 ))}
               </Box>
@@ -132,14 +132,14 @@ export default function AnalysisPage() {
             {categories.slice(0, 8).map(cat => (
               <Chip key={cat} label={cat} onClick={() => setSelectedCategory(cat)}
                 variant={selectedCategory === cat ? "filled" : "outlined"}
-                sx={{ borderRadius: "6px", fontSize: "0.82rem", height: 30, backgroundColor: selectedCategory === cat ? PRIMARY : "#fff", color: selectedCategory === cat ? "#fff" : "#374151", borderColor: "#d1d5db", "&:hover": { backgroundColor: selectedCategory === cat ? PRIMARY : "#e6f7f6" } }}
+                sx={{ borderRadius: "6px", fontSize: "0.82rem", height: 30, backgroundColor: selectedCategory === cat ? PRIMARY : "var(--card-bg)", color: selectedCategory === cat ? "#fff" : "var(--text-dark)", borderColor: "var(--border-color)", "&:hover": { backgroundColor: selectedCategory === cat ? PRIMARY : "var(--bg-secondary)" }, transition: "all 0.3s ease" }}
               />
             ))}
           </Box>
 
           {/* Tabs */}
-          <Box sx={{ borderBottom: "1px solid #e5e7eb", mb: 3 }}>
-            <Tabs value={tab} onChange={(_, v) => setTab(v)} sx={{ "& .MuiTab-root": { textTransform: "none", fontWeight: 600, fontSize: "0.9rem" }, "& .MuiTabs-indicator": { backgroundColor: PRIMARY } }}>
+          <Box sx={{ borderBottom: "1px solid var(--border-color)", mb: 3, transition: "border-color 0.3s ease" }}>
+            <Tabs value={tab} onChange={(_, v) => setTab(v)} sx={{ "& .MuiTab-root": { textTransform: "none", fontWeight: 600, fontSize: "0.9rem", color: "var(--text-muted)", transition: "color 0.3s ease" }, "& .MuiTabs-indicator": { backgroundColor: PRIMARY } }}>
               <Tab label="All Analysis" />
               <Tab label="Trending" />
               <Tab label="Top Rated" />
@@ -157,7 +157,7 @@ export default function AnalysisPage() {
           {filtered.length === 0 && (
             <Box sx={{ textAlign: "center", py: 8 }}>
               <BarChart3 size={48} color="#d1d5db" style={{ margin: "0 auto 16px" }} />
-              <Typography sx={{ color: "#6b7280" }}>No analysis datasets found</Typography>
+              <Typography sx={{ color: "var(--text-muted)" }}>No analysis datasets found</Typography>
             </Box>
           )}
         </Container>
@@ -168,7 +168,7 @@ export default function AnalysisPage() {
 
 function AnalysisDatasetCard({ dataset, onOpen }) {
   return (
-    <Card sx={{ borderRadius: "12px", overflow: "hidden", border: "1px solid #e5e7eb", boxShadow: "none", transition: "all 0.3s ease", cursor: "pointer", "&:hover": { transform: "translateY(-4px)", boxShadow: "0 10px 24px rgba(97,197,195,0.12)", borderColor: PRIMARY } }} onClick={onOpen}>
+    <Card sx={{ borderRadius: "12px", overflow: "hidden", border: "1px solid var(--border-color)", boxShadow: "none", transition: "all 0.3s ease", cursor: "pointer", "&:hover": { transform: "translateY(-4px)", boxShadow: "0 10px 24px rgba(97,197,195,0.12)", borderColor: PRIMARY } }} onClick={onOpen}>
       {/* Image */}
       <Box sx={{ height: 160, backgroundImage: `url(${dataset.image})`, backgroundSize: "cover", backgroundPosition: "center", position: "relative" }}>
         <Box sx={{ position: "absolute", top: 8, left: 8, px: 1, py: 0.4, borderRadius: 1, backgroundColor: "rgba(0,0,0,0.6)", display: "flex", alignItems: "center", gap: 0.5 }}>
@@ -183,21 +183,21 @@ function AnalysisDatasetCard({ dataset, onOpen }) {
       <CardContent sx={{ p: 2.5 }}>
         {/* Title */}
         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 1, mb: 1 }}>
-          <Typography sx={{ fontSize: "0.95rem", fontWeight: 700, color: "#111827", lineHeight: 1.4, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{dataset.title}</Typography>
+          <Typography sx={{ fontSize: "0.95rem", fontWeight: 700, color: "var(--text-dark)", lineHeight: 1.4, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{dataset.title}</Typography>
           <MoreVertical size={16} color="#9ca3af" style={{ flexShrink: 0 }} />
         </Box>
 
-        <Typography sx={{ fontSize: "0.85rem", color: "#1f2937", fontWeight: 500, mb: 1 }}>{dataset.author}</Typography>
+        <Typography sx={{ fontSize: "0.85rem", color: "var(--text-dark)", fontWeight: 500, mb: 1 }}>{dataset.author}</Typography>
 
-        <Box sx={{ display: "flex", alignItems: "center", gap: 0.8, mb: 1.5, fontSize: "0.78rem", color: "#6b7280" }}>
-          <Typography sx={{ fontSize: "inherit" }}>Usability <b style={{ color: "#111827" }}>{dataset.usability}</b></Typography>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 0.8, mb: 1.5, fontSize: "0.78rem", color: "var(--text-muted)" }}>
+          <Typography sx={{ fontSize: "inherit" }}>Usability <b style={{ color: "var(--text-dark)" }}>{dataset.usability}</b></Typography>
           <Box sx={{ width: 3, height: 3, borderRadius: "50%", backgroundColor: "#d1d5db" }} />
           <Calendar size={12} />
           <Typography sx={{ fontSize: "inherit" }}>{dataset.updated}</Typography>
         </Box>
 
         {/* Stats row */}
-        <Box sx={{ display: "flex", gap: 1.5, mb: 1.5, fontSize: "0.78rem", color: "#6b7280" }}>
+        <Box sx={{ display: "flex", gap: 1.5, mb: 1.5, fontSize: "0.78rem", color: "var(--text-muted)" }}>
           <Box sx={{ display: "flex", alignItems: "center", gap: 0.4 }}><Eye size={12} /><span>{dataset.views.toLocaleString()} views</span></Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: 0.4 }}><Star size={12} color="#f59e0b" /><span>{dataset.rating}</span></Box>
         </Box>
@@ -205,9 +205,9 @@ function AnalysisDatasetCard({ dataset, onOpen }) {
         {/* File Details */}
         <Box sx={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 0.8, mb: 2, pb: 2, borderBottom: "1px solid #e5e7eb" }}>
           {[{ icon: <FileIcon size={13} color={PRIMARY} />, label: dataset.files }, { icon: <HardDrive size={13} color={PRIMARY} />, label: dataset.size }, { icon: <Download size={13} color={PRIMARY} />, label: dataset.downloads }].map((item, i) => (
-            <Box key={i} sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 0.4, p: 0.8, borderRadius: 1.5, backgroundColor: "#f9fafb" }}>
+            <Box key={i} sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 0.4, p: 0.8, borderRadius: 1.5, backgroundColor: "var(--bg-secondary)" }}>
               {item.icon}
-              <Typography sx={{ fontSize: "0.65rem", color: "#6b7280", textAlign: "center", lineHeight: 1.3 }}>{item.label}</Typography>
+              <Typography sx={{ fontSize: "0.65rem", color: "var(--text-muted)", textAlign: "center", lineHeight: 1.3 }}>{item.label}</Typography>
             </Box>
           ))}
         </Box>
@@ -218,7 +218,7 @@ function AnalysisDatasetCard({ dataset, onOpen }) {
             <Box sx={{ px: 1, py: 0.4, borderRight: "1px solid #d1d5db", display: "flex", alignItems: "center" }}><ChevronUp size={13} /></Box>
             <Box sx={{ px: 1.2, py: 0.3 }}><Typography sx={{ fontSize: "0.78rem", fontWeight: 700 }}>{dataset.votes}</Typography></Box>
           </Box>
-          <Box sx={{ px: 1.5, py: 0.6, backgroundColor: "#e6f7f6", borderRadius: "6px" }}>
+          <Box sx={{ px: 1.5, py: 0.6, backgroundColor: "rgba(32, 178, 170, 0.1)", borderRadius: "6px" }}>
             <Typography sx={{ fontSize: "0.85rem", fontWeight: 700, color: PRIMARY }}>${dataset.price} USD</Typography>
           </Box>
         </Box>

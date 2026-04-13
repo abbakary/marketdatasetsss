@@ -1,5 +1,6 @@
 import { Box, Typography, TextField, Chip, InputAdornment, Button, Slider } from "@mui/material";
 import { X, Search, Users, Star, TrendingUp, CheckCircle, Clock } from "lucide-react";
+import { useThemeColors } from "../../../utils/useThemeColors";
 
 /**
  * ProjectFiltersPanel
@@ -20,6 +21,8 @@ export default function ProjectFiltersPanel({
   categories = [],
   statuses = [],
 }) {
+  const themeColors = useThemeColors();
+
   const handleToggle = (field, value) => {
     const currentValues = filters[field] || [];
     const updated = currentValues.includes(value)
@@ -48,7 +51,7 @@ export default function ProjectFiltersPanel({
           sx={{
             position: "fixed",
             inset: 0,
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            backgroundColor: themeColors.isDarkMode ? "rgba(0, 0, 0, 0.7)" : "rgba(0, 0, 0, 0.5)",
             zIndex: 9998,
           }}
         />
@@ -62,18 +65,18 @@ export default function ProjectFiltersPanel({
           top: 0,
           height: "100vh",
           width: { xs: "100%", sm: 420 },
-          backgroundColor: "#fff",
-          boxShadow: isOpen ? "-4px 0 16px rgba(0, 0, 0, 0.15)" : "none",
+          backgroundColor: "var(--card-bg)",
+          boxShadow: isOpen ? (themeColors.isDarkMode ? "-4px 0 16px rgba(0, 0, 0, 0.4)" : "-4px 0 16px rgba(0, 0, 0, 0.15)") : "none",
           transform: isOpen ? "translateX(0)" : "translateX(100%)",
-          transition: "transform 0.3s ease-in-out",
+          transition: "transform 0.3s ease-in-out, background-color 0.3s ease",
           zIndex: 9999,
           overflowY: "auto",
           "&::-webkit-scrollbar": { width: "6px" },
-          "&::-webkit-scrollbar-track": { backgroundColor: "#f1f1f1" },
+          "&::-webkit-scrollbar-track": { backgroundColor: "var(--bg-secondary)" },
           "&::-webkit-scrollbar-thumb": {
-            backgroundColor: "#ccc",
+            backgroundColor: "var(--border-color)",
             borderRadius: "3px",
-            "&:hover": { backgroundColor: "#aaa" },
+            "&:hover": { backgroundColor: "var(--text-muted)" },
           },
         }}
       >
@@ -81,17 +84,18 @@ export default function ProjectFiltersPanel({
         <Box
           sx={{
             p: 2.5,
-            borderBottom: "1px solid #e5e7eb",
+            borderBottom: "1px solid var(--border-color)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
             position: "sticky",
             top: 0,
-            backgroundColor: "#fff",
+            backgroundColor: "var(--card-bg)",
             zIndex: 10,
+            transition: "background-color 0.3s ease, border-color 0.3s ease",
           }}
         >
-          <Typography sx={{ fontSize: "1.2rem", fontWeight: 700, color: "#111827" }}>
+          <Typography sx={{ fontSize: "1.2rem", fontWeight: 700, color: "var(--text-dark)", transition: "color 0.3s ease" }}>
             Project Filters
           </Typography>
           <Box
@@ -104,8 +108,9 @@ export default function ProjectFiltersPanel({
               width: 32,
               height: 32,
               borderRadius: "50%",
-              backgroundColor: "#f3f4f6",
-              "&:hover": { backgroundColor: "#e5e7eb" },
+              backgroundColor: "var(--bg-secondary)",
+              "&:hover": { backgroundColor: "var(--border-color)" },
+              transition: "background-color 0.3s ease",
             }}
           >
             <X size={18} />
@@ -116,7 +121,7 @@ export default function ProjectFiltersPanel({
         <Box sx={{ p: 2.5 }}>
           {/* Tags Search */}
           <Box sx={{ mb: 4 }}>
-            <Typography sx={{ fontSize: "0.85rem", fontWeight: 700, color: "#111827", textTransform: "uppercase", mb: 1.5 }}>
+            <Typography sx={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text-dark)", textTransform: "uppercase", mb: 1.5, transition: "color 0.3s ease" }}>
               Tags / Keywords
             </Typography>
             <TextField
@@ -134,7 +139,7 @@ export default function ProjectFiltersPanel({
 
           {/* Project Status */}
           <Box sx={{ mb: 4 }}>
-            <Typography sx={{ fontSize: "0.85rem", fontWeight: 700, color: "#111827", textTransform: "uppercase", mb: 1.5 }}>
+            <Typography sx={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text-dark)", textTransform: "uppercase", mb: 1.5, transition: "color 0.3s ease" }}>
               Project Status
             </Typography>
             <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
@@ -148,9 +153,10 @@ export default function ProjectFiltersPanel({
                     borderRadius: "6px",
                     fontWeight: 600,
                     backgroundColor: filters.selectedStatuses?.includes(status) ? SECONDARY_COLOR : "transparent",
-                    color: filters.selectedStatuses?.includes(status) ? "#fff" : "#4b5563",
-                    borderColor: "#d1d5db",
-                    "&:hover": { backgroundColor: filters.selectedStatuses?.includes(status) ? SECONDARY_COLOR : "#f9fafb" }
+                    color: filters.selectedStatuses?.includes(status) ? "#fff" : "var(--text-muted)",
+                    borderColor: "var(--border-color)",
+                    "&:hover": { backgroundColor: filters.selectedStatuses?.includes(status) ? SECONDARY_COLOR : "var(--bg-secondary)" },
+                    transition: "all 0.3s ease"
                   }}
                 />
               ))}
@@ -159,7 +165,7 @@ export default function ProjectFiltersPanel({
 
           {/* Categories */}
           <Box sx={{ mb: 4 }}>
-            <Typography sx={{ fontSize: "0.85rem", fontWeight: 700, color: "#111827", textTransform: "uppercase", mb: 1.5 }}>
+            <Typography sx={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text-dark)", textTransform: "uppercase", mb: 1.5, transition: "color 0.3s ease" }}>
               Categories
             </Typography>
             <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
@@ -173,9 +179,10 @@ export default function ProjectFiltersPanel({
                     borderRadius: "6px",
                     fontWeight: 600,
                     backgroundColor: filters.selectedCategories?.includes(cat) ? PRIMARY_COLOR : "transparent",
-                    color: filters.selectedCategories?.includes(cat) ? "#fff" : "#4b5563",
-                    borderColor: "#d1d5db",
-                    "&:hover": { backgroundColor: filters.selectedCategories?.includes(cat) ? PRIMARY_COLOR : "#f9fafb" }
+                    color: filters.selectedCategories?.includes(cat) ? "#fff" : "var(--text-muted)",
+                    borderColor: "var(--border-color)",
+                    "&:hover": { backgroundColor: filters.selectedCategories?.includes(cat) ? PRIMARY_COLOR : "var(--bg-secondary)" },
+                    transition: "all 0.3s ease"
                   }}
                 />
               ))}
@@ -184,7 +191,7 @@ export default function ProjectFiltersPanel({
 
           {/* Progress Slider */}
           <Box sx={{ mb: 4 }}>
-            <Typography sx={{ fontSize: "0.85rem", fontWeight: 700, color: "#111827", textTransform: "uppercase", mb: 2 }}>
+            <Typography sx={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text-dark)", textTransform: "uppercase", mb: 2, transition: "color 0.3s ease" }}>
               Completion Progress (%)
             </Typography>
             <Box sx={{ px: 1 }}>
@@ -195,8 +202,8 @@ export default function ProjectFiltersPanel({
                 sx={{ color: SECONDARY_COLOR }}
               />
               <Box sx={{ display: "flex", justifyContent: "space-between", mt: 1 }}>
-                <Typography sx={{ fontSize: "0.8rem", color: "#6b7280" }}>{filters.progressRange?.[0] || 0}%</Typography>
-                <Typography sx={{ fontSize: "0.8rem", color: "#6b7280" }}>{filters.progressRange?.[1] || 100}%</Typography>
+                <Typography sx={{ fontSize: "0.8rem", color: "var(--text-muted)", transition: "color 0.3s ease" }}>{filters.progressRange?.[0] || 0}%</Typography>
+                <Typography sx={{ fontSize: "0.8rem", color: "var(--text-muted)", transition: "color 0.3s ease" }}>{filters.progressRange?.[1] || 100}%</Typography>
               </Box>
             </Box>
           </Box>
@@ -204,7 +211,7 @@ export default function ProjectFiltersPanel({
             <Box sx={{ display: "flex", flexDirection: "column", gap: 3.5, mb: 4 }}>
               {/* Project Type */}
               <Box>
-                <Typography sx={{ fontSize: "0.85rem", fontWeight: 700, color: "#111827", textTransform: "uppercase", mb: 1.5 }}>
+                <Typography sx={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text-dark)", textTransform: "uppercase", mb: 1.5, transition: "color 0.3s ease" }}>
                   Project Type
                 </Typography>
                 <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
@@ -218,9 +225,10 @@ export default function ProjectFiltersPanel({
                         borderRadius: "6px",
                         fontWeight: 600,
                         backgroundColor: filters.selectedProjectTypes?.includes(type) ? SECONDARY_COLOR : "transparent",
-                        color: filters.selectedProjectTypes?.includes(type) ? "#fff" : "#4b5563",
-                        borderColor: "#d1d5db",
-                        "&:hover": { backgroundColor: filters.selectedProjectTypes?.includes(type) ? SECONDARY_COLOR : "#f9fafb" }
+                        color: filters.selectedProjectTypes?.includes(type) ? "#fff" : "var(--text-muted)",
+                        borderColor: "var(--border-color)",
+                        "&:hover": { backgroundColor: filters.selectedProjectTypes?.includes(type) ? SECONDARY_COLOR : "var(--bg-secondary)" },
+                        transition: "all 0.3s ease"
                       }}
                     />
                   ))}
@@ -229,7 +237,7 @@ export default function ProjectFiltersPanel({
 
               {/* Monetization Strategy */}
               <Box>
-                <Typography sx={{ fontSize: "0.85rem", fontWeight: 700, color: "#111827", textTransform: "uppercase", mb: 1.5 }}>
+                <Typography sx={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text-dark)", textTransform: "uppercase", mb: 1.5, transition: "color 0.3s ease" }}>
                   Monetization Model
                 </Typography>
                 <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
@@ -243,9 +251,10 @@ export default function ProjectFiltersPanel({
                         borderRadius: "6px",
                         fontWeight: 600,
                         backgroundColor: filters.selectedMonetizationTypes?.includes(model) ? PRIMARY_COLOR : "transparent",
-                        color: filters.selectedMonetizationTypes?.includes(model) ? "#fff" : "#4b5563",
-                        borderColor: "#d1d5db",
-                        "&:hover": { backgroundColor: filters.selectedMonetizationTypes?.includes(model) ? PRIMARY_COLOR : "#f9fafb" }
+                        color: filters.selectedMonetizationTypes?.includes(model) ? "#fff" : "var(--text-muted)",
+                        borderColor: "var(--border-color)",
+                        "&:hover": { backgroundColor: filters.selectedMonetizationTypes?.includes(model) ? PRIMARY_COLOR : "var(--bg-secondary)" },
+                        transition: "all 0.3s ease"
                       }}
                     />
                   ))}
@@ -253,7 +262,7 @@ export default function ProjectFiltersPanel({
               </Box>
 
               <Box>
-                <Typography sx={{ fontSize: "0.8rem", fontWeight: 600, color: "#4b5563", mb: 1, display: "flex", alignItems: "center", gap: 1 }}>
+                <Typography sx={{ fontSize: "0.8rem", fontWeight: 600, color: "var(--text-muted)", mb: 1, display: "flex", alignItems: "center", gap: 1, transition: "color 0.3s ease" }}>
                   <Users size={14} /> Min Contributors
                 </Typography>
                 <TextField
@@ -267,7 +276,7 @@ export default function ProjectFiltersPanel({
                 />
               </Box>
               <Box>
-                <Typography sx={{ fontSize: "0.8rem", fontWeight: 600, color: "#4b5563", mb: 1, display: "flex", alignItems: "center", gap: 1 }}>
+                <Typography sx={{ fontSize: "0.8rem", fontWeight: 600, color: "var(--text-muted)", mb: 1, display: "flex", alignItems: "center", gap: 1, transition: "color 0.3s ease" }}>
                   <Star size={14} /> Min Stars
                 </Typography>
                 <TextField
@@ -287,26 +296,28 @@ export default function ProjectFiltersPanel({
         <Box
           sx={{
             p: 2.5,
-            borderTop: "1px solid #e5e7eb",
+            borderTop: "1px solid var(--border-color)",
             display: "flex",
             gap: 2,
             position: "sticky",
             bottom: 0,
-            backgroundColor: "#fff",
+            backgroundColor: "var(--card-bg)",
             zIndex: 10,
+            transition: "background-color 0.3s ease, border-color 0.3s ease",
           }}
         >
           <Button
             fullWidth
             onClick={onClear}
             sx={{
-              backgroundColor: "#f3f4f6",
-              color: "#374151",
+              backgroundColor: "var(--bg-secondary)",
+              color: "var(--text-dark)",
               fontWeight: 700,
               textTransform: "none",
               py: 1.2,
               borderRadius: "8px",
-              "&:hover": { backgroundColor: "#e5e7eb" },
+              "&:hover": { backgroundColor: "var(--border-color)" },
+              transition: "all 0.3s ease",
             }}
           >
             Clear All

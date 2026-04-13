@@ -49,15 +49,15 @@ export default function FundsPage() {
 
   return (
     <PageLayout>
-      <Box sx={{ minHeight: "100vh", backgroundColor: "#f8f9fb", py: 4 }}>
+      <Box sx={{ minHeight: "100vh", backgroundColor: "var(--bg-gray)", py: 4, transition: "background-color 0.3s ease" }}>
         <Container maxWidth="xl">
           {/* Header */}
           <Box sx={{ mb: 4 }}>
             <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 1 }}>
               <Wallet size={28} color={PRIMARY} />
-              <Typography sx={{ fontSize: "1.8rem", fontWeight: 800, color: "#111827" }}>Dataset Funds</Typography>
+              <Typography sx={{ fontSize: "1.8rem", fontWeight: 800, color: "var(--text-dark)" }}>Dataset Funds</Typography>
             </Box>
-            <Typography sx={{ color: "#6b7280", fontSize: "1rem" }}>
+            <Typography sx={{ color: "var(--text-muted)", fontSize: "1rem" }}>
               Support dataset creation through grants, investments, and crowdfunding campaigns
             </Typography>
           </Box>
@@ -69,8 +69,8 @@ export default function FundsPage() {
                 <CardContent sx={{ p: 2.5 }}>
                   <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                     <Box>
-                      <Typography sx={{ fontSize: "0.8rem", color: "#6b7280", mb: 0.5 }}>{s.label}</Typography>
-                      <Typography sx={{ fontSize: "1.6rem", fontWeight: 800, color: "#111827" }}>{s.value}</Typography>
+                      <Typography sx={{ fontSize: "0.8rem", color: "var(--text-muted)", mb: 0.5 }}>{s.label}</Typography>
+                      <Typography sx={{ fontSize: "1.6rem", fontWeight: 800, color: "var(--text-dark)" }}>{s.value}</Typography>
                       <Box sx={{ display: "flex", alignItems: "center", gap: 0.5, mt: 0.5 }}>
                         <ArrowUpRight size={13} color="#16a34a" />
                         <Typography sx={{ fontSize: "0.78rem", color: "#16a34a", fontWeight: 600 }}>{s.change}</Typography>
@@ -117,7 +117,7 @@ export default function FundsPage() {
           {filtered.length === 0 && (
             <Box sx={{ textAlign: "center", py: 8 }}>
               <Wallet size={48} color="#d1d5db" style={{ margin: "0 auto 16px" }} />
-              <Typography sx={{ color: "#6b7280" }}>No funding campaigns found</Typography>
+              <Typography sx={{ color: "var(--text-muted)" }}>No funding campaigns found</Typography>
             </Box>
           )}
         </Container>
@@ -157,18 +157,18 @@ function FundingDatasetCard({ dataset, onOpen }) {
 
       <CardContent sx={{ p: 2.5 }}>
         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 1, mb: 0.8 }}>
-          <Typography sx={{ fontSize: "0.95rem", fontWeight: 700, color: "#111827", lineHeight: 1.4, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{dataset.title}</Typography>
+          <Typography sx={{ fontSize: "0.95rem", fontWeight: 700, color: "var(--text-dark)", lineHeight: 1.4, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{dataset.title}</Typography>
           <MoreVertical size={16} color="#9ca3af" style={{ flexShrink: 0 }} />
         </Box>
         <Typography sx={{ fontSize: "0.82rem", color: "#1f2937", fontWeight: 500, mb: 0.8 }}>{dataset.author}</Typography>
-        <Typography sx={{ fontSize: "0.8rem", color: "#6b7280", mb: 1.5, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{dataset.description}</Typography>
+        <Typography sx={{ fontSize: "0.8rem", color: "var(--text-muted)", mb: 1.5, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{dataset.description}</Typography>
 
         {/* File Details */}
         <Box sx={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 0.6, mb: 1.5, pb: 1.5, borderBottom: "1px solid #e5e7eb" }}>
           {[{ icon: <FileIcon size={12} color={PRIMARY} />, label: dataset.files }, { icon: <HardDrive size={12} color={PRIMARY} />, label: dataset.size }, { icon: <Download size={12} color={PRIMARY} />, label: dataset.downloads }].map((item, i) => (
             <Box key={i} sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 0.3, p: 0.6, borderRadius: 1, backgroundColor: "#f9fafb" }}>
               {item.icon}
-              <Typography sx={{ fontSize: "0.62rem", color: "#6b7280", textAlign: "center", lineHeight: 1.2 }}>{item.label}</Typography>
+              <Typography sx={{ fontSize: "0.62rem", color: "var(--text-muted)", textAlign: "center", lineHeight: 1.2 }}>{item.label}</Typography>
             </Box>
           ))}
         </Box>
@@ -176,15 +176,15 @@ function FundingDatasetCard({ dataset, onOpen }) {
         {/* Funding Progress */}
         <Box sx={{ mb: 1.5 }}>
           <Box sx={{ display: "flex", justifyContent: "space-between", mb: 0.8 }}>
-            <Typography sx={{ fontSize: "0.85rem", fontWeight: 700, color: "#111827" }}>${dataset.fundingRaised.toLocaleString()}</Typography>
-            <Typography sx={{ fontSize: "0.8rem", color: "#6b7280" }}>of ${dataset.fundingGoal.toLocaleString()}</Typography>
+            <Typography sx={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text-dark)" }}>${dataset.fundingRaised.toLocaleString()}</Typography>
+            <Typography sx={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>of ${dataset.fundingGoal.toLocaleString()}</Typography>
           </Box>
           <LinearProgress variant="determinate" value={pct} sx={{ height: 8, borderRadius: 4, backgroundColor: "#e5e7eb", "& .MuiLinearProgress-bar": { backgroundColor: isFunded ? "#16a34a" : PRIMARY, borderRadius: 4 } }} />
           <Box sx={{ display: "flex", justifyContent: "space-between", mt: 0.8 }}>
             <Typography sx={{ fontSize: "0.78rem", fontWeight: 700, color: isFunded ? "#16a34a" : PRIMARY }}>{pct}% funded</Typography>
             <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
               <Users size={12} color="#6b7280" />
-              <Typography sx={{ fontSize: "0.78rem", color: "#6b7280" }}>{dataset.backers} backers</Typography>
+              <Typography sx={{ fontSize: "0.78rem", color: "var(--text-muted)" }}>{dataset.backers} backers</Typography>
             </Box>
           </Box>
         </Box>

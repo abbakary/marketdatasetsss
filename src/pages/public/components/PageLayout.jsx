@@ -7,9 +7,10 @@ export default function PageLayout({ children }) {
     <Box
       sx={{
         minHeight: "100vh",
-        background: "#f6f7fb",
+        backgroundColor: "var(--bg-gray)",
         display: "flex",
         flexDirection: "column",
+        transition: "background-color 0.3s ease",
       }}
     >
       <NavBar />

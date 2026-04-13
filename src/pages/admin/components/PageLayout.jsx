@@ -51,6 +51,7 @@ export default function PageLayout({ children }) {
           display: "flex",
           flexDirection: "column",
           minHeight: "calc(100vh - 70px)",
+          backgroundColor: "var(--bg-gray)",
         }}
       >
         <div style={{ flexGrow: 1, padding: "20px" }}>{children}</div>

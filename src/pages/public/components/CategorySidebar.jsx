@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { Box, Typography, Paper, Badge } from "@mui/material";
 import { ChevronRight } from "lucide-react";
 import { createPortal } from "react-dom";
+import { useThemeColors } from "../../../utils/useThemeColors";
 
 const PRIMARY_COLOR = "#61C5C3";
 
@@ -168,9 +169,15 @@ export const categoriesData = [
 ];
 
 export default function CategorySidebar({ onCategorySelect, selectedCategory }) {
+  const themeColors = useThemeColors();
   const [hoveredCategoryId, setHoveredCategoryId] = useState(null);
   const [hoveredItemPosition, setHoveredItemPosition] = useState(null);
   const closeTimerRef = useRef(null);
+
+  // Derived colors for selected/hover states
+  const selectedBgColor = themeColors.isDarkMode ? "rgba(32, 178, 170, 0.15)" : "#e6f7f6";
+  const hoverBgColor = themeColors.isDarkMode ? "rgba(32, 178, 170, 0.08)" : "#f0fffe";
+  const submenuHoverBg = themeColors.isDarkMode ? "rgba(32, 178, 170, 0.06)" : "#f3fffe";
 
   const handleSelectCategory = (category) => {
     onCategorySelect({
@@ -259,11 +266,12 @@ export default function CategorySidebar({ onCategorySelect, selectedCategory }) 
       <Paper
         elevation={0}
         sx={{
-          backgroundColor: "#fff",
-          border: "1px solid #e5e7eb",
+          backgroundColor: "var(--card-bg)",
+          border: "1px solid var(--border-color)",
           borderRadius: "12px",
           overflow: "visible",
           position: "relative",
+          transition: "background-color 0.3s ease, border-color 0.3s ease",
         }}
       >
         <Box sx={{ p: 2.5 }}>
@@ -271,8 +279,9 @@ export default function CategorySidebar({ onCategorySelect, selectedCategory }) 
             sx={{
               fontSize: "1.1rem",
               fontWeight: 700,
-              color: "#111827",
+              color: "var(--text-dark)",
               mb: 2,
+              transition: "color 0.3s ease",
             }}
           >
             Categories
@@ -304,15 +313,15 @@ export default function CategorySidebar({ onCategorySelect, selectedCategory }) 
                   alignItems: "center",
                   gap: 1.5,
                   px: 2.5,
-                  py: 1.2, // Reduced from 1.8
+                  py: 1.2,
                   cursor: "pointer",
-                  backgroundColor: isSelected ? "#e6f7f6" : "transparent",
+                  backgroundColor: isSelected ? selectedBgColor : "transparent",
                   borderLeft: isSelected
                     ? `4px solid ${PRIMARY_COLOR}`
                     : "4px solid transparent",
                   transition: "all 0.2s ease",
                   "&:hover": {
-                    backgroundColor: "#f0fffe",
+                    backgroundColor: hoverBgColor,
                   },
                 }}
                 onClick={() => handleSelectCategory(category)}
@@ -326,7 +335,7 @@ export default function CategorySidebar({ onCategorySelect, selectedCategory }) 
                     sx={{
                       fontSize: "0.95rem",
                       fontWeight: 600,
-                      color: isSelected ? PRIMARY_COLOR : "#111827",
+                      color: isSelected ? PRIMARY_COLOR : "var(--text-dark)",
                       transition: "color 0.2s ease",
                     }}
                   >
@@ -335,8 +344,9 @@ export default function CategorySidebar({ onCategorySelect, selectedCategory }) 
                   <Typography
                     sx={{
                       fontSize: "0.8rem",
-                      color: "#6b7280",
+                      color: "var(--text-muted)",
                       mt: 0.3,
+                      transition: "color 0.3s ease",
                     }}
                   >
                     {category.datasetCount} datasets
@@ -372,16 +382,17 @@ export default function CategorySidebar({ onCategorySelect, selectedCategory }) 
                 minWidth: 280,
                 maxWidth: 320,
                 maxHeight: "calc(100vh - 24px)",
-                backgroundColor: "#fff",
-                border: `1px solid #e5e7eb`,
+                backgroundColor: "var(--card-bg)",
+                border: `1px solid var(--border-color)`,
                 borderRadius: "12px",
-                boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
+                boxShadow: themeColors.isDarkMode ? "0 8px 24px rgba(0, 0, 0, 0.4)" : "0 8px 24px rgba(0, 0, 0, 0.1)",
                 zIndex: 20000,
                 py: 1.2,
                 px: 0.5,
                 overflowY: "auto",
                 overscrollBehavior: "contain",
                 animation: "fadeIn 0.2s ease-in-out",
+                transition: "background-color 0.3s ease, border-color 0.3s ease",
                 "@keyframes fadeIn": {
                   from: {
                     opacity: 0,
@@ -413,14 +424,14 @@ export default function CategorySidebar({ onCategorySelect, selectedCategory }) 
                       py: 1.3,
                       cursor: "pointer",
                       backgroundColor: isSubSelected
-                        ? "#e6f7f6"
+                        ? selectedBgColor
                         : "transparent",
-                      color: isSubSelected ? PRIMARY_COLOR : "#374151",
+                      color: isSubSelected ? PRIMARY_COLOR : "var(--text-muted)",
                       transition: "all 0.15s ease",
                       borderRadius: "8px",
                       mx: 1,
                       "&:hover": {
-                        backgroundColor: "#f3fffe",
+                        backgroundColor: submenuHoverBg,
                       },
                     }}
                   >

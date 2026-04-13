@@ -100,16 +100,16 @@ export default function ReportsPage() {
  
    return (
     <PageLayout>
-      <Box sx={{ minHeight: "100vh", backgroundColor: "#f8f9fb", py: 4 }}>
+      <Box sx={{ minHeight: "100vh", backgroundColor: "var(--bg-gray)", py: 4, transition: "background-color 0.3s ease" }}>
         <Container maxWidth="xl">
           {/* Header */}
           <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 4, flexWrap: "wrap", gap: 2 }}>
             <Box>
               <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 1 }}>
                 <FileText size={28} color={PRIMARY} />
-                <Typography sx={{ fontSize: "1.8rem", fontWeight: 800, color: "#111827" }}>Dataset Reports</Typography>
+                <Typography sx={{ fontSize: "1.8rem", fontWeight: 800, color: "var(--text-dark)" }}>Dataset Reports</Typography>
               </Box>
-              <Typography sx={{ color: "#6b7280", fontSize: "1rem" }}>
+              <Typography sx={{ color: "var(--text-muted)", fontSize: "1rem" }}>
                 Access published research reports, industry analyses, and data-driven insights
               </Typography>
             </Box>
@@ -128,8 +128,8 @@ export default function ReportsPage() {
                 <CardContent sx={{ p: 2.5 }}>
                   <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                     <Box>
-                      <Typography sx={{ fontSize: "0.8rem", color: "#6b7280", mb: 0.5 }}>{s.label}</Typography>
-                      <Typography sx={{ fontSize: "1.6rem", fontWeight: 800, color: "#111827" }}>{s.value}</Typography>
+                      <Typography sx={{ fontSize: "0.8rem", color: "var(--text-muted)", mb: 0.5 }}>{s.label}</Typography>
+                      <Typography sx={{ fontSize: "1.6rem", fontWeight: 800, color: "var(--text-dark)" }}>{s.value}</Typography>
                       <Box sx={{ display: "flex", alignItems: "center", gap: 0.5, mt: 0.5 }}>
                         <ArrowUpRight size={13} color="#16a34a" />
                         <Typography sx={{ fontSize: "0.78rem", color: "#16a34a", fontWeight: 600 }}>{s.change}</Typography>
@@ -147,7 +147,7 @@ export default function ReportsPage() {
             <Card sx={{ borderRadius: 3, border: "1px solid #e5e7eb", boxShadow: "none" }}>
               <CardContent sx={{ p: 3 }}>
                 <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 3 }}>
-                  <Typography sx={{ fontWeight: 800, color: "#111827" }}>Report & Citation Trends</Typography>
+                  <Typography sx={{ fontWeight: 800, color: "var(--text-dark)" }}>Report & Citation Trends</Typography>
                   <Chip label="Last 6 Months" size="small" sx={{ borderRadius: "4px", fontSize: "0.7rem" }} />
                 </Box>
                 <Box sx={{ height: 280, width: "100%", minHeight: 280 }}>
@@ -173,7 +173,7 @@ export default function ReportsPage() {
 
             <Card sx={{ borderRadius: 3, border: "1px solid #e5e7eb", boxShadow: "none" }}>
               <CardContent sx={{ p: 3 }}>
-                <Typography sx={{ fontWeight: 800, color: "#111827", mb: 3 }}>Report Categories</Typography>
+                <Typography sx={{ fontWeight: 800, color: "var(--text-dark)", mb: 3 }}>Report Categories</Typography>
                 <Box sx={{ height: 280, width: "100%", minHeight: 280 }}>
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
@@ -228,7 +228,7 @@ export default function ReportsPage() {
           {sortedAndFiltered.length === 0 && (
             <Box sx={{ textAlign: "center", py: 8 }}>
               <FileText size={48} color="#d1d5db" style={{ margin: "0 auto 16px" }} />
-              <Typography sx={{ color: "#6b7280" }}>No reports found</Typography>
+              <Typography sx={{ color: "var(--text-muted)" }}>No reports found</Typography>
             </Box>
           )}
 
@@ -244,8 +244,8 @@ export default function ReportsPage() {
                   <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
                     <Box sx={{ p: 1, backgroundColor: "#e6f7f6", borderRadius: 1.5, display: "flex" }}><FilePlus size={20} color={PRIMARY} /></Box>
                     <Box>
-                      <Typography sx={{ fontSize: "1.1rem", fontWeight: 800, color: "#111827" }}>Request Custom Report</Typography>
-                      <Typography sx={{ fontSize: "0.75rem", color: "#6b7280" }}>Tell us what research you need</Typography>
+                      <Typography sx={{ fontSize: "1.1rem", fontWeight: 800, color: "var(--text-dark)" }}>Request Custom Report</Typography>
+                      <Typography sx={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>Tell us what research you need</Typography>
                     </Box>
                   </Box>
                   <IconButton onClick={handleCloseModal} size="small"><X size={20} /></IconButton>
@@ -258,7 +258,7 @@ export default function ReportsPage() {
                         <Send size={32} color="#16a34a" />
                       </Box>
                       <Typography sx={{ fontWeight: 800, mb: 1 }}>Request Sent Successfully!</Typography>
-                      <Typography sx={{ color: "#6b7280", fontSize: "0.9rem" }}>Our analysts will review your request and get back to you within 24 hours.</Typography>
+                      <Typography sx={{ color: "var(--text-muted)", fontSize: "0.9rem" }}>Our analysts will review your request and get back to you within 24 hours.</Typography>
                     </Box>
                   ) : (
                     <Box sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}>
@@ -317,11 +317,11 @@ function ReportDatasetCard({ dataset, isBookmarked, onBookmark, onOpen }) {
         {/* Author */}
         <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1.5 }}>
           <Avatar sx={{ width: 22, height: 22, fontSize: "0.65rem", backgroundColor: "#f3f4f6", color: "#374151", border: "1px solid #e5e7eb" }}>{dataset.authorAvatar}</Avatar>
-          <Typography sx={{ fontSize: "0.75rem", fontWeight: 600, color: "#6b7280" }}>{dataset.author}</Typography>
+          <Typography sx={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--text-muted)" }}>{dataset.author}</Typography>
         </Box>
 
         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 1, mb: 1 }}>
-          <Typography sx={{ fontSize: "0.95rem", fontWeight: 800, color: "#111827", lineHeight: 1.4, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{dataset.title}</Typography>
+          <Typography sx={{ fontSize: "0.95rem", fontWeight: 800, color: "var(--text-dark)", lineHeight: 1.4, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{dataset.title}</Typography>
           <IconButton size="small" sx={{ p: 0.5 }}><MoreVertical size={16} color="#9ca3af" /></IconButton>
         </Box>
 
@@ -330,18 +330,18 @@ function ReportDatasetCard({ dataset, isBookmarked, onBookmark, onOpen }) {
         {/* Stats Row */}
         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2, p: 1.5, backgroundColor: "#f9fafb", borderRadius: 2 }}>
           <Box sx={{ textAlign: "center" }}>
-            <Typography sx={{ fontSize: "0.85rem", fontWeight: 800, color: "#111827" }}>{dataset.citations}</Typography>
-            <Typography sx={{ fontSize: "0.65rem", color: "#6b7280", textTransform: "uppercase" }}>Citations</Typography>
+            <Typography sx={{ fontSize: "0.85rem", fontWeight: 800, color: "var(--text-dark)" }}>{dataset.citations}</Typography>
+            <Typography sx={{ fontSize: "0.65rem", color: "var(--text-muted)", textTransform: "uppercase" }}>Citations</Typography>
           </Box>
           <Box sx={{ width: 1, height: 20, backgroundColor: "#e5e7eb" }} />
           <Box sx={{ textAlign: "center" }}>
-            <Typography sx={{ fontSize: "0.85rem", fontWeight: 800, color: "#111827" }}>{dataset.views >= 1000 ? (dataset.views/1000).toFixed(1) + "k" : dataset.views}</Typography>
-            <Typography sx={{ fontSize: "0.65rem", color: "#6b7280", textTransform: "uppercase" }}>Views</Typography>
+            <Typography sx={{ fontSize: "0.85rem", fontWeight: 800, color: "var(--text-dark)" }}>{dataset.views >= 1000 ? (dataset.views/1000).toFixed(1) + "k" : dataset.views}</Typography>
+            <Typography sx={{ fontSize: "0.65rem", color: "var(--text-muted)", textTransform: "uppercase" }}>Views</Typography>
           </Box>
           <Box sx={{ width: 1, height: 20, backgroundColor: "#e5e7eb" }} />
           <Box sx={{ textAlign: "center" }}>
             <Typography sx={{ fontSize: "0.85rem", fontWeight: 800, color: "#16a34a" }}>{dataset.usability}</Typography>
-            <Typography sx={{ fontSize: "0.65rem", color: "#6b7280", textTransform: "uppercase" }}>Score</Typography>
+            <Typography sx={{ fontSize: "0.65rem", color: "var(--text-muted)", textTransform: "uppercase" }}>Score</Typography>
           </Box>
         </Box>
 
@@ -349,7 +349,7 @@ function ReportDatasetCard({ dataset, isBookmarked, onBookmark, onOpen }) {
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
             <Star size={14} color="#f59e0b" fill="#f59e0b" />
-            <Typography sx={{ fontSize: "0.85rem", fontWeight: 700, color: "#111827" }}>{dataset.rating}</Typography>
+            <Typography sx={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text-dark)" }}>{dataset.rating}</Typography>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
             <Typography sx={{ fontSize: "0.95rem", fontWeight: 800, color: PRIMARY }}>${dataset.price}</Typography>
