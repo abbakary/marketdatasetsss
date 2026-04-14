@@ -31,13 +31,6 @@ const categoryStats = [
   { name: "Trade", datasets: 37, growth: 9, color: "#ef4444" },
 ];
 
-const topMetrics = [
-  { label: "Total Datasets Analyzed", value: "1,245", change: "+12%", up: true, icon: <BarChart3 size={22} color={PRIMARY} /> },
-  { label: "Avg Usability Score", value: "9.4", change: "+0.3", up: true, icon: <Star size={22} color={PRIMARY} /> },
-  { label: "Total Downloads", value: "48.2K", change: "+24%", up: true, icon: <Download size={22} color={PRIMARY} /> },
-  { label: "Active Analysts", value: "3,200", change: "+8%", up: true, icon: <Activity size={22} color={PRIMARY} /> },
-];
-
 export default function AnalysisPage() {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
@@ -45,6 +38,13 @@ export default function AnalysisPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const themeColors = useThemeColors();
   const PRIMARY = themeColors.teal;
+
+  const topMetrics = [
+    { label: "Total Datasets Analyzed", value: "1,245", change: "+12%", up: true, icon: <BarChart3 size={22} color={PRIMARY} /> },
+    { label: "Avg Usability Score", value: "9.4", change: "+0.3", up: true, icon: <Star size={22} color={PRIMARY} /> },
+    { label: "Total Downloads", value: "48.2K", change: "+24%", up: true, icon: <Download size={22} color={PRIMARY} /> },
+    { label: "Active Analysts", value: "3,200", change: "+8%", up: true, icon: <Activity size={22} color={PRIMARY} /> },
+  ];
 
   const categories = ["All", ...categoriesData.map(c => c.name)];
 

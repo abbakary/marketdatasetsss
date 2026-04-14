@@ -25,13 +25,6 @@ const projectDatasets = [
   { id: 6, title: "Renewable Energy Open Dataset", author: "EnergyStats Collective", category: "Natural Resources and Energy", projectType: "Open Source Prep", monetization: "Open Data", fundingGoal: "$5,000", usability: "9.9", updated: "Updated 4 days ago", files: "7 Files (CSV, JSON)", size: "9.8 GB", downloads: "2,341 downloads", votes: 68, image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=900&q=80", price: "Free Listing", status: "Completed", contributors: 51, forks: 156, stars: 678, progress: 100, tags: ["energy", "renewable", "solar", "wind"], avatars: ["https://i.pravatar.cc/40?img=131", "https://i.pravatar.cc/40?img=141", "https://i.pravatar.cc/40?img=151"] },
 ];
 
-const projectStats = [
-  { label: "Listed Projects", value: "284", change: "+18", icon: <FolderOpen size={22} color={PRIMARY} /> },
-  { label: "Expert Partners", value: "12.4K", change: "+24%", icon: <Users size={22} color={PRIMARY} /> },
-  { label: "Active Collabs", value: "8,920", change: "+31%", icon: <GitFork size={22} color={PRIMARY} /> },
-  { label: "Market Trust", value: "48.2K", change: "+22%", icon: <Star size={22} color={PRIMARY} /> },
-];
-
 const statusColors = { Active: { bg: "#f0fdf4", color: "#16a34a", border: "#bbf7d0" }, "Seeking Contributors": { bg: "#eff6ff", color: "#2563eb", border: "#bfdbfe" }, Completed: { bg: "#f5f3ff", color: "#7c3aed", border: "#ddd6fe" } };
 
 export default function ProjectPage() {
@@ -39,6 +32,13 @@ export default function ProjectPage() {
   const themeColors = useThemeColors();
   const PRIMARY = "#FF8C00"; // Orange
   const SECONDARY = themeColors.teal;
+
+  const projectStats = [
+    { label: "Listed Projects", value: "284", change: "+18", icon: <FolderOpen size={22} color={PRIMARY} /> },
+    { label: "Expert Partners", value: "12.4K", change: "+24%", icon: <Users size={22} color={PRIMARY} /> },
+    { label: "Active Collabs", value: "8,920", change: "+31%", icon: <GitFork size={22} color={PRIMARY} /> },
+    { label: "Market Trust", value: "48.2K", change: "+22%", icon: <Star size={22} color={PRIMARY} /> },
+  ];
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedStatus, setSelectedStatus] = useState("All");
@@ -218,7 +218,7 @@ export default function ProjectPage() {
               onClick={handleOpenModal}
               sx={{ px: 2.5, py: 1.2, backgroundColor: PRIMARY, borderRadius: "8px", cursor: "pointer", display: "flex", alignItems: "center", gap: 1, "&:hover": { backgroundColor: "#e67e00" } }}>
               <Plus size={16} color="#fff" />
-              <Typography sx={{ color: "#fff", fontWeight: 700, fontSize: "0.9rem" }}>Request Collaborator Project</Typography>
+              <Typography sx={{ color: "#fff", fontWeight: 700, fontSize: "0.9rem" }}>Request Custom Project</Typography>
             </Box>
           </Box>
 
@@ -299,6 +299,7 @@ export default function ProjectPage() {
                 onVote={(e) => handleVote(d.id, e)}
                 themeColors={themeColors}
                 PRIMARY={PRIMARY}
+                SECONDARY={SECONDARY}
               />
             ))}
           </Box>
@@ -332,8 +333,8 @@ export default function ProjectPage() {
                       <Plus size={20} color={PRIMARY} />
                     </Box>
                     <Box>
-                      <Typography sx={{ fontSize: "1.1rem", fontWeight: 800, color: "var(--text-dark)" }}>Request Collaborator Project</Typography>
-                      <Typography sx={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>Create a structured order for your dataset/project needs</Typography>
+                      <Typography sx={{ fontSize: "1.1rem", fontWeight: 800, color: "var(--text-dark)" }}>Request Custom Project</Typography>
+                      <Typography sx={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>Define your project requirements and connect with expert teams to bring your vision to life</Typography>
                     </Box>
                   </Box>
                   <IconButton onClick={handleCloseModal} size="small" sx={{ color: themeColors.textMuted, "&:hover": { color: "var(--text-dark)", backgroundColor: themeColors.hoverBg } }}>
@@ -345,14 +346,14 @@ export default function ProjectPage() {
                     {/* Section 1: Core Request Information */}
                     <Box sx={{ mb: 3.5 }}>
                       <Typography sx={{ fontSize: "0.95rem", fontWeight: 800, color: PRIMARY, mb: 2.5, borderBottom: `2px solid ${PRIMARY}`, pb: 1 }}>
-                        📝 Core Requirements
+                        📋 Project Overview
                       </Typography>
                       <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, gap: 2.5 }}>
                         <Box>
                           <Typography sx={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text-dark)", mb: 0.8 }}>
-                            Project Title *
+                            Project Name *
                           </Typography>
-                          <TextField fullWidth placeholder="e.g. Healthcare Claims Intelligence Dataset" value={form.title} onChange={handleInputChange("title")} required
+                          <TextField fullWidth placeholder="e.g. E-commerce Customer Analytics Platform" value={form.title} onChange={handleInputChange("title")} required
                             sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }} />
                         </Box>
 
@@ -371,9 +372,9 @@ export default function ProjectPage() {
 
                       <Box sx={{ mt: 2.5 }}>
                         <Typography sx={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text-dark)", mb: 0.8 }}>
-                          Detailed Description *
+                          Project Description *
                         </Typography>
-                        <TextField fullWidth multiline rows={3} placeholder="Describe your need, technical requirements, use case, and expected outcomes..." value={form.description} onChange={handleInputChange("description")} required
+                        <TextField fullWidth multiline rows={3} placeholder="Describe your project vision, objectives, key features, data requirements, and expected deliverables..." value={form.description} onChange={handleInputChange("description")} required
                           sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }} />
                       </Box>
                     </Box>
@@ -381,44 +382,44 @@ export default function ProjectPage() {
                     {/* Section 2: Dataset Specifications */}
                     <Box sx={{ mb: 3.5 }}>
                       <Typography sx={{ fontSize: "0.95rem", fontWeight: 800, color: PRIMARY, mb: 2.5, borderBottom: `2px solid ${PRIMARY}`, pb: 1 }}>
-                        📊 Dataset Specifications
+                        🎯 Project Specifications
                       </Typography>
                       <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr 1fr" }, gap: 2.5 }}>
                         <Box>
                           <Typography sx={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text-dark)", mb: 0.8 }}>
-                            Data Type *
+                            Project Type *
                           </Typography>
                           <TextField fullWidth select value={form.dataType} onChange={handleInputChange("dataType")} required
                             sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }}>
-                            <MenuItem value="CSV">CSV</MenuItem>
-                            <MenuItem value="JSON">JSON</MenuItem>
-                            <MenuItem value="Images">Images</MenuItem>
-                            <MenuItem value="Text">Text/Documents</MenuItem>
-                            <MenuItem value="API">API</MenuItem>
-                            <MenuItem value="Database">Database</MenuItem>
-                            <MenuItem value="Mixed">Mixed Format</MenuItem>
+                            <MenuItem value="CSV">Dataset Collection & Integration</MenuItem>
+                            <MenuItem value="JSON">Data Pipeline & Processing</MenuItem>
+                            <MenuItem value="Images">Analytics & Reporting</MenuItem>
+                            <MenuItem value="Text">ML Model Development</MenuItem>
+                            <MenuItem value="API">Data Cleaning & Preparation</MenuItem>
+                            <MenuItem value="Database">Data Visualization</MenuItem>
+                            <MenuItem value="Mixed">Custom Specification</MenuItem>
                           </TextField>
                         </Box>
 
                         <Box>
                           <Typography sx={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text-dark)", mb: 0.8 }}>
-                            Dataset Size *
+                            Expected Data Scale *
                           </Typography>
                           <TextField fullWidth select value={form.datasetSize} onChange={handleInputChange("datasetSize")} required
                             sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }}>
-                            <MenuItem value="<1GB">Less than 1GB</MenuItem>
-                            <MenuItem value="1-10GB">1-10 GB</MenuItem>
-                            <MenuItem value="10-50GB">10-50 GB</MenuItem>
-                            <MenuItem value="50GB+">50GB+</MenuItem>
-                            <MenuItem value="Unknown">Unknown (will determine)</MenuItem>
+                            <MenuItem value="small">Small (Less than 1GB)</MenuItem>
+                            <MenuItem value="1-10GB">Medium (1-10 GB)</MenuItem>
+                            <MenuItem value="10-50GB">Large (10-50 GB)</MenuItem>
+                            <MenuItem value="enterprise">Enterprise (50GB+)</MenuItem>
+                            <MenuItem value="tbd">To Be Determined</MenuItem>
                           </TextField>
                         </Box>
 
                         <Box>
                           <Typography sx={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text-dark)", mb: 0.8 }}>
-                            Source Preference
+                            Technology Stack (Optional)
                           </Typography>
-                          <TextField fullWidth placeholder="e.g. Public APIs, Proprietary, Web scraped..." value={form.sourcePreference} onChange={handleInputChange("sourcePreference")}
+                          <TextField fullWidth placeholder="e.g. Python, React, PostgreSQL, AWS, etc." value={form.sourcePreference} onChange={handleInputChange("sourcePreference")}
                             sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }} />
                         </Box>
                       </Box>
@@ -427,7 +428,7 @@ export default function ProjectPage() {
                     {/* Section 3: Budget & Timeline */}
                     <Box sx={{ mb: 3.5 }}>
                       <Typography sx={{ fontSize: "0.95rem", fontWeight: 800, color: SECONDARY, mb: 2.5, borderBottom: `2px solid ${SECONDARY}`, pb: 1 }}>
-                        💰 Budget & Timeline
+                        💼 Budget & Timeline
                       </Typography>
                       <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, gap: 2.5 }}>
                         <Box>
@@ -459,22 +460,22 @@ export default function ProjectPage() {
                     {/* Section 4: Collaboration Preferences */}
                     <Box sx={{ mb: 3.5 }}>
                       <Typography sx={{ fontSize: "0.95rem", fontWeight: 800, color: SECONDARY, mb: 2.5, borderBottom: `2px solid ${SECONDARY}`, pb: 1 }}>
-                        👥 Collaboration Preferences
+                        🤝 Team & Preferences
                       </Typography>
 
                       <Box sx={{ mb: 2.5 }}>
                         <Typography sx={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text-dark)", mb: 0.8 }}>
-                          Preferred Collaborator (Optional)
+                          Preferred Partner (Optional)
                         </Typography>
-                        <TextField fullWidth placeholder="Name or ID of preferred collaborator (leave empty to open bids)" value={form.preferredCollaborator} onChange={handleInputChange("preferredCollaborator")}
+                        <TextField fullWidth placeholder="Specify a preferred team or expert (leave empty to receive multiple proposals)" value={form.preferredCollaborator} onChange={handleInputChange("preferredCollaborator")}
                           sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }} />
                       </Box>
 
                       <Box sx={{ p: 2, backgroundColor: "rgba(97, 197, 195, 0.05)", borderRadius: 2, border: `1px solid ${SECONDARY}20`, display: "flex", gap: 2, alignItems: "center" }}>
                         <input type="checkbox" checked={form.openToSuggestions} onChange={(e) => setForm({ ...form, openToSuggestions: e.target.checked })} style={{ width: 18, height: 18, cursor: "pointer" }} />
                         <Box>
-                          <Typography sx={{ fontSize: "0.9rem", fontWeight: 700, color: "var(--text-dark)" }}>Open to Suggestions</Typography>
-                          <Typography sx={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>If unchecked, only preferred collaborator will receive this request</Typography>
+                          <Typography sx={{ fontSize: "0.9rem", fontWeight: 700, color: "var(--text-dark)" }}>Accept Proposals from Other Teams</Typography>
+                          <Typography sx={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>If unchecked, only your preferred partner will be contacted</Typography>
                         </Box>
                       </Box>
                     </Box>
@@ -482,7 +483,7 @@ export default function ProjectPage() {
                     {/* Section 5: Priority & Attachments */}
                     <Box>
                       <Typography sx={{ fontSize: "0.95rem", fontWeight: 800, color: PRIMARY, mb: 2.5, borderBottom: `2px solid ${PRIMARY}`, pb: 1 }}>
-                        ⚡ Priority & Attachments
+                        📎 Additional Details
                       </Typography>
                       <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, gap: 2.5 }}>
                         <Box>
@@ -500,9 +501,9 @@ export default function ProjectPage() {
 
                         <Box>
                           <Typography sx={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text-dark)", mb: 0.8 }}>
-                            Requirements Doc (URL)
+                            Documentation Link (Optional)
                           </Typography>
-                          <TextField fullWidth placeholder="Link to detailed requirements or RFP document" value={form.attachmentUrl} onChange={handleInputChange("attachmentUrl")}
+                          <TextField fullWidth placeholder="Link to wireframes, designs, specifications, or RFP document" value={form.attachmentUrl} onChange={handleInputChange("attachmentUrl")}
                             sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }} />
                         </Box>
                       </Box>
@@ -514,7 +515,7 @@ export default function ProjectPage() {
                   <Button onClick={handleCloseModal} sx={{ px: 3, py: 1, color: "var(--text-muted)", fontWeight: 700, textTransform: "none" }}>Cancel</Button>
                   <Button onClick={handleSubmit} variant="contained" disabled={!form.title || !form.category || !form.budgetMin || !form.budgetMax || !form.deadline}
                     sx={{ px: 4, py: 1, backgroundColor: PRIMARY, "&:hover": { backgroundColor: "#e67e00" }, fontWeight: 700, textTransform: "none", boxShadow: "none", borderRadius: 2 }}>
-                    Submit Project Request
+                    Post Custom Project
                   </Button>
                 </Box>
               </Box>
@@ -537,7 +538,7 @@ export default function ProjectPage() {
   );
 }
 
-function ProjectDatasetCard({ dataset, onOpen, onVote, themeColors, PRIMARY }) {
+function ProjectDatasetCard({ dataset, onOpen, onVote, themeColors, PRIMARY, SECONDARY }) {
   const sc = statusColors[dataset.status] || statusColors.Active;
 
   return (
